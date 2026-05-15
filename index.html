@@ -1,0 +1,3065 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bags Station CR — Bolsos y accesorios premium en Costa Rica. Estilo único, calidad garantizada, envíos a todo el país." />
+  <title>Bags Station CR | Bolsos & Accesorios</title>
+
+  <!-- ═══════════════════════════════════════════════════
+       SECURITY HEADERS (via meta equivalents)
+       Los headers HTTP reales van en vercel.json / netlify.toml.
+       Estas metas proveen protección adicional client-side.
+  ════════════════════════════════════════════════════ -->
+
+  <!--
+    Content Security Policy
+    - default-src 'none'       → bloquea cualquier recurso no explícito
+    - script-src 'unsafe-inline' → necesario por el <script> inline actual
+    - style-src fonts.googleapis.com → Google Fonts CSS
+    - font-src  fonts.gstatic.com   → archivos de fuentes
+    - img-src   'self' data:        → imágenes locales + data URIs
+    - connect-src 'none'            → sin fetch/XHR a terceros
+    - frame-ancestors 'none'        → previene clickjacking / iframes
+    - form-action 'none'            → no hay formularios; bloquea envíos
+    - base-uri   'self'             → previene ataques de base tag injection
+  -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none';
+                 script-src 'self' 'unsafe-inline';
+                 style-src  'self' 'unsafe-inline' https://fonts.googleapis.com;
+                 font-src   https://fonts.gstatic.com;
+                 img-src    'self' data:;
+                 connect-src 'none';
+                 frame-src  'none';
+                 frame-ancestors 'none';
+                 form-action 'none';
+                 base-uri   'self';" />
+
+  <!-- Previene que navegadores antiguos detecten MIME type incorrecto -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+
+  <!-- Bloquea renderizado en iframes externos (anti-clickjacking) -->
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+
+  <!--
+    Referrer-Policy: al navegar desde esta página hacia WhatsApp/Instagram
+    solo se envía el origen, no la URL completa.
+  -->
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <!--
+    Permissions-Policy: deshabilita APIs del navegador que este sitio
+    no necesita, reduciendo la superficie de ataque.
+  -->
+  <meta http-equiv="Permissions-Policy"
+        content="camera=(), microphone=(), geolocation=(), payment=(),
+                 usb=(), magnetometer=(), gyroscope=(), accelerometer=()" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="Logo/Logo BagsStation.jpeg" type="image/jpeg" />
+  <link rel="apple-touch-icon" href="Logo/Logo BagsStation.jpeg" />
+
+  <!-- Fonts: Bricolage Grotesque + DM Sans (igual que referencia Essentia) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =====================================================
+       VARIABLES Y RESET
+    ===================================================== */
+    :root {
+      --bg:        #FDF9F8;
+      --bg-dark:   #1C1419;
+      --bg-card:   #FFFFFF;
+      --bg-cream:  #FAF0F3;
+      --accent:    #C2748A;
+      --accent-h:  #A85C73;
+      --accent-lt: #F0C8D4;
+      --sage:      #F2D5DC;
+      --sage-dark: #2C1820;
+      --text:      #1C1419;
+      --text-2:    #5E4A52;
+      --text-3:    #9E8590;
+      --border:    #EDD8DE;
+      --white:     #FFFFFF;
+      --wa:        #25D366;
+      --wa-h:      #1DB954;
+
+      --serif:  'Bricolage Grotesque', sans-serif;
+      --sans:   'DM Sans', sans-serif;
+      --ease:   cubic-bezier(0.4, 0, 0.2, 1);
+      --r:      10px;
+      --r-lg:   18px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+    ul, ol { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* =====================================================
+       NAVBAR
+    ===================================================== */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      padding: 22px 0;
+      transition: padding .35s var(--ease), background .35s var(--ease), box-shadow .35s var(--ease);
+    }
+    #nav.scrolled {
+      background: rgba(253, 249, 248, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 14px 0;
+      box-shadow: 0 1px 0 var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      line-height: 1;
+    }
+    .nav-logo-img {
+      height: 42px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+    .footer-brand-logo .nav-logo-img {
+      height: 48px;
+      filter: brightness(0) invert(1);
+    }
+    @media (max-width: 768px) {
+      .nav-logo-img { height: 34px; }
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-2);
+      position: relative;
+      padding-bottom: 2px;
+      transition: color .2s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1.5px;
+      background: var(--accent);
+      transition: width .25s var(--ease);
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: var(--bg-dark) !important;
+      color: var(--white) !important;
+      padding: 10px 22px !important;
+      border-radius: 100px !important;
+      font-size: 0.8125rem !important;
+      font-weight: 600 !important;
+      transition: background .25s !important;
+    }
+    .nav-cta:hover { background: var(--accent) !important; }
+    .nav-cta::after { display: none !important; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+      border: none; background: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all .3s var(--ease);
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile overlay menu */
+    .mobile-nav {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 800;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      transform: translateX(100%);
+      transition: transform .4s var(--ease);
+    }
+    .mobile-nav.open { transform: translateX(0); }
+    .mobile-nav a {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 8vw, 3rem);
+      font-weight: 700;
+      color: var(--text);
+      opacity: .7;
+      transition: opacity .2s, color .2s;
+    }
+    .mobile-nav a:hover { opacity: 1; color: var(--accent); }
+
+    /* =====================================================
+       HERO
+    ===================================================== */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: var(--bg-dark);
+    }
+    .hero-bg-img {
+      position: absolute; inset: 0;
+      background-image: url('Imagen%20Principal/Imagen%20Principal.webp');
+      background-size: cover;
+      background-position: center 30%;
+      opacity: .32;
+    }
+    .hero-grad {
+      position: absolute; inset: 0;
+      background: linear-gradient(110deg, rgba(26,23,20,.85) 40%, rgba(26,23,20,.2) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 660px;
+      padding: 120px 0 100px;
+    }
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(184,135,74,.12);
+      border: 1px solid rgba(184,135,74,.3);
+      color: var(--accent-lt);
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero-pill::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    .hero-h1 {
+      font-family: var(--serif);
+      font-size: clamp(3.2rem, 6.5vw, 6rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      margin-bottom: 24px;
+    }
+    .hero-h1 em {
+      font-style: italic;
+      color: var(--accent-lt);
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 1.5vw, 1.125rem);
+      color: rgba(255,255,255,.65);
+      line-height: 1.75;
+      font-weight: 300;
+      max-width: 460px;
+      margin-bottom: 44px;
+    }
+    .hero-btns {
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent);
+      color: var(--white);
+      padding: 15px 32px;
+      border-radius: 100px;
+      font-size: .9375rem;
+      font-weight: 600;
+      letter-spacing: -.01em;
+      transition: background .25s, transform .25s, box-shadow .25s;
+    }
+    .btn-primary:hover {
+      background: var(--accent-h);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(184,135,74,.35);
+    }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: rgba(255,255,255,.8);
+      padding: 15px 32px;
+      border-radius: 100px;
+      font-size: .9375rem;
+      font-weight: 500;
+      border: 1.5px solid rgba(255,255,255,.25);
+      transition: border-color .25s, color .25s;
+    }
+    .btn-ghost:hover {
+      border-color: rgba(255,255,255,.7);
+      color: var(--white);
+    }
+    .hero-numbers {
+      position: absolute;
+      bottom: 48px; right: 0; left: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .hero-numbers .container {
+      display: flex; justify-content: flex-end; gap: 52px;
+    }
+    .hn-item { text-align: center; }
+    .hn-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -.04em;
+      line-height: 1;
+    }
+    .hn-label {
+      font-size: .7rem;
+      color: rgba(255,255,255,.45);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-top: 4px;
+    }
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,.3);
+      font-size: .65rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px; height: 52px;
+      background: linear-gradient(to bottom, rgba(255,255,255,.35), transparent);
+      animation: scrl 2.2s ease-in-out infinite;
+    }
+    @keyframes scrl {
+      0%,100% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+      55%     { opacity: .2; transform: scaleY(.4); transform-origin: top; }
+    }
+
+    /* =====================================================
+       MARQUEE BAND
+    ===================================================== */
+    .marquee-band {
+      background: var(--sage-dark);
+      padding: 17px 0;
+      overflow: hidden;
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: mq 28s linear infinite;
+    }
+    .marquee-item {
+      display: flex; align-items: center; gap: 20px;
+      padding: 0 28px;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.75);
+      white-space: nowrap;
+    }
+    .mq-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,.3); }
+    @keyframes mq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* =====================================================
+       SECCIONES COMUNES
+    ===================================================== */
+    section { padding: 96px 0; }
+
+    .s-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .s-label::before {
+      content: ''; width: 28px; height: 1.5px;
+      background: var(--accent);
+    }
+    .s-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -.035em;
+      color: var(--text);
+    }
+    .s-title em { font-style: italic; color: var(--accent); }
+    .s-desc {
+      font-size: 1.0625rem;
+      color: var(--text-2);
+      line-height: 1.75;
+      margin-top: 14px;
+      max-width: 520px;
+      font-weight: 300;
+    }
+
+    /* =====================================================
+       PRODUCTOS
+    ===================================================== */
+    #productos { background: var(--bg); }
+
+    .prod-head {
+      display: flex; align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+    .prod-head-left { max-width: 480px; }
+    .link-all {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--accent);
+      border-bottom: 1.5px solid var(--accent);
+      padding-bottom: 1px;
+      white-space: nowrap;
+      transition: opacity .2s, gap .2s;
+    }
+    .link-all:hover { opacity: .75; gap: 10px; }
+
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .prod-card {
+      background: var(--bg-card);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform .4s var(--ease), box-shadow .4s var(--ease), border-color .4s;
+      cursor: pointer;
+      display: block;
+    }
+    .prod-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 28px 60px rgba(26,23,20,.1);
+      border-color: transparent;
+    }
+    .prod-img {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      background: var(--bg-cream);
+    }
+    .prod-img img {
+      width: 100%; height: 100%;
+      transition: transform .65s var(--ease);
+    }
+    .prod-card:hover .prod-img img { transform: scale(1.06); }
+    .prod-badge {
+      position: absolute;
+      top: 14px; left: 14px;
+      background: var(--accent);
+      color: var(--white);
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 4px 11px;
+      border-radius: 100px;
+    }
+    .prod-hover {
+      position: absolute; inset: 0;
+      background: rgba(26,23,20,.38);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transition: opacity .3s var(--ease);
+    }
+    .prod-card:hover .prod-hover { opacity: 1; }
+    .prod-hover-btn {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--white);
+      color: var(--text);
+      padding: 11px 22px;
+      border-radius: 100px;
+      font-size: .8125rem;
+      font-weight: 600;
+      transform: translateY(8px);
+      transition: transform .3s var(--ease);
+    }
+    .prod-card:hover .prod-hover-btn { transform: translateY(0); }
+    .prod-info { padding: 22px 22px 20px; }
+    .prod-name {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      margin-bottom: 7px;
+    }
+    .prod-desc {
+      font-size: .85rem;
+      color: var(--text-2);
+      line-height: 1.6;
+      font-weight: 300;
+      margin-bottom: 18px;
+    }
+    .prod-foot {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .prod-price {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .prod-price small {
+      display: block;
+      font-family: var(--sans);
+      font-size: .75rem;
+      font-weight: 400;
+      color: var(--text-3);
+      margin-top: 1px;
+    }
+    .btn-wa {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--text);
+      color: var(--white);
+      padding: 9px 18px;
+      border-radius: 100px;
+      font-size: .8rem;
+      font-weight: 600;
+      transition: background .25s, transform .2s;
+      flex-shrink: 0;
+    }
+    .btn-wa:hover {
+      background: var(--wa);
+      transform: scale(1.03);
+    }
+    .prod-foot-btns { display: flex; gap: 7px; align-items: center; flex-shrink: 0; }
+    .btn-buy-now-foot {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent); color: var(--white);
+      padding: 9px 14px; border-radius: 100px;
+      font-size: .8rem; font-weight: 600; font-family: var(--sans);
+      border: none; cursor: pointer; white-space: nowrap;
+      transition: background .25s, transform .2s; flex-shrink: 0;
+    }
+    .btn-buy-now-foot:hover { background: var(--accent-h); transform: scale(1.03); }
+    .prod-foot-btns .btn-wa { padding-left: 14px; padding-right: 14px; }
+    @media (max-width: 680px) {
+      .prod-foot { flex-wrap: wrap; row-gap: 10px; }
+      .prod-foot-btns { margin-left: auto; }
+    }
+
+    /* =====================================================
+       SOBRE NOSOTROS
+    ===================================================== */
+    #nosotros {
+      background: var(--bg-dark);
+      color: var(--white);
+      overflow: hidden;
+      position: relative;
+    }
+    #nosotros::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 450px; height: 450px;
+      background: radial-gradient(circle, rgba(194,116,138,.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-content .s-title { color: var(--white); }
+    .about-content .s-desc { color: rgba(255,255,255,.55); }
+    .about-body {
+      margin-top: 24px;
+      font-size: 1.0625rem;
+      color: rgba(255,255,255,.65);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+    .about-feats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 44px;
+    }
+    .about-feat {
+      padding: 20px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--r);
+    }
+    .af-icon { font-size: 1.4rem; margin-bottom: 10px; }
+    .af-title {
+      font-size: .9375rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 5px;
+    }
+    .af-text {
+      font-size: .8rem;
+      color: rgba(255,255,255,.45);
+      line-height: 1.6;
+    }
+    .about-image { position: relative; }
+    .about-img-wrap {
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+    }
+    .about-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    .about-card {
+      position: absolute;
+      bottom: -24px; left: -24px;
+      background: var(--accent);
+      border-radius: var(--r);
+      padding: 22px 26px;
+      color: var(--white);
+      min-width: 170px;
+    }
+    .ac-num {
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      line-height: 1;
+    }
+    .ac-text {
+      font-size: .8rem;
+      opacity: .85;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    /* =====================================================
+       DESTACADOS
+    ===================================================== */
+    #destacado { background: var(--bg-cream); }
+    .feat-header { text-align: center; margin-bottom: 60px; }
+    .feat-header .s-label { justify-content: center; }
+    .feat-header .s-label::before { display: none; }
+    .feat-header .s-desc { margin: 14px auto 0; }
+
+    .feat-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .feat-main {
+      position: relative;
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      aspect-ratio: 5 / 4;
+      cursor: pointer;
+    }
+    .feat-main img {
+      width: 100%; height: 100%;
+      transition: transform .65s var(--ease);
+    }
+    .feat-main:hover img { transform: scale(1.05); }
+    .feat-main-ov {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,23,20,.8) 0%, transparent 55%);
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 30px;
+    }
+    .feat-tag {
+      background: var(--accent);
+      color: var(--white);
+      font-size: .65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      padding: 4px 12px;
+      border-radius: 100px;
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 12px;
+    }
+    .feat-main-title {
+      font-family: var(--serif);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -.03em;
+      margin-bottom: 6px;
+    }
+    .feat-main-sub {
+      font-size: .875rem;
+      color: rgba(255,255,255,.65);
+    }
+    .feat-side { display: flex; flex-direction: column; gap: 20px; }
+    .feat-side-card {
+      position: relative;
+      border-radius: var(--r);
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      cursor: pointer;
+    }
+    .feat-side-card img {
+      width: 100%; height: 100%;
+      transition: transform .55s var(--ease);
+    }
+    .feat-side-card:hover img { transform: scale(1.06); }
+    .feat-side-ov {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,23,20,.78) 0%, transparent 58%);
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 18px;
+    }
+    .feat-side-title {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -.02em;
+    }
+    .feat-side-sub {
+      font-size: .75rem;
+      color: rgba(255,255,255,.55);
+      margin-top: 3px;
+    }
+
+    /* =====================================================
+       CONTACTO
+    ===================================================== */
+    #contacto { background: var(--bg); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .contact-content .s-desc { margin-bottom: 40px; }
+    .contact-opts { display: flex; flex-direction: column; gap: 14px; }
+    .c-btn {
+      display: flex; align-items: center; gap: 16px;
+      padding: 18px 22px;
+      border-radius: var(--r);
+      border: 1.5px solid var(--border);
+      transition: border-color .25s, background .25s, transform .25s;
+      text-decoration: none;
+    }
+    .c-btn:hover {
+      border-color: var(--accent);
+      background: rgba(194,116,138,.04);
+      transform: translateX(4px);
+    }
+    .c-btn.wa-btn {
+      background: var(--wa);
+      border-color: var(--wa);
+    }
+    .c-btn.wa-btn:hover {
+      background: var(--wa-h);
+      border-color: var(--wa-h);
+      transform: translateX(4px);
+    }
+    .c-icon {
+      width: 46px; height: 46px;
+      border-radius: 10px;
+      background: rgba(37,211,102,.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .c-btn.wa-btn .c-icon { background: rgba(255,255,255,.2); }
+    .c-info { flex: 1; }
+    .c-title {
+      font-size: .9375rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .c-btn.wa-btn .c-title { color: var(--white); }
+    .c-sub {
+      font-size: .8125rem;
+      color: var(--text-3);
+      margin-top: 2px;
+    }
+    .c-btn.wa-btn .c-sub { color: rgba(255,255,255,.7); }
+    .c-arr { color: var(--text-3); font-size: 1.1rem; }
+    .c-btn.wa-btn .c-arr { color: rgba(255,255,255,.6); }
+
+    .contact-image { position: relative; }
+    .contact-img-wrap {
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      aspect-ratio: 5 / 6;
+    }
+    .contact-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    .review-float {
+      position: absolute;
+      top: -18px; right: -18px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 18px 22px;
+      box-shadow: 0 10px 36px rgba(26,23,20,.1);
+      min-width: 190px;
+    }
+    .stars { display: flex; gap: 3px; margin-bottom: 8px; }
+    .star { color: var(--accent); font-size: .875rem; }
+    .review-text {
+      font-size: .8125rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .review-name {
+      font-size: .75rem;
+      color: var(--text-3);
+      margin-top: 6px;
+    }
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+    footer {
+      background: var(--bg-dark);
+      padding: 64px 0 32px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 56px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      margin-bottom: 32px;
+    }
+    .footer-brand .nav-logo { font-size: 1.4rem; }
+    .footer-desc {
+      font-size: .875rem;
+      color: rgba(255,255,255,.45);
+      line-height: 1.75;
+      margin: 14px 0 28px;
+      max-width: 280px;
+      font-weight: 300;
+    }
+    .footer-social { display: flex; gap: 10px; }
+    .footer-social a {
+      width: 38px; height: 38px;
+      border-radius: 9px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.5);
+      font-size: .95rem;
+      transition: background .2s, color .2s, transform .2s;
+    }
+    .footer-social a:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+    .footer-col-title {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 18px;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 11px; }
+    .footer-links a {
+      font-size: .875rem;
+      color: rgba(255,255,255,.45);
+      transition: color .2s;
+      font-weight: 300;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-bottom {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
+    }
+    .footer-copy {
+      font-size: .8125rem;
+      color: rgba(255,255,255,.35);
+    }
+    .footer-copy a { color: var(--accent); }
+
+    /* =====================================================
+       FLOATING WA
+    ===================================================== */
+    .fab-wa {
+      position: fixed;
+      bottom: 26px; right: 26px;
+      z-index: 800;
+      width: 58px; height: 58px;
+      background: var(--wa);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 24px rgba(37,211,102,.38);
+      transition: transform .3s var(--ease), box-shadow .3s;
+      cursor: pointer;
+    }
+    .fab-wa:hover {
+      transform: scale(1.1);
+      box-shadow: 0 14px 36px rgba(37,211,102,.48);
+    }
+    .fab-wa svg { width: 28px; height: 28px; fill: #fff; }
+    .fab-pulse {
+      position: absolute; inset: -5px;
+      border-radius: 50%;
+      background: rgba(37,211,102,.25);
+      animation: pls 2.8s ease-out infinite;
+    }
+    @keyframes pls {
+      0%   { transform: scale(1); opacity: .8; }
+      100% { transform: scale(1.75); opacity: 0; }
+    }
+
+    /* =====================================================
+       REVEAL ANIMATIONS
+    ===================================================== */
+    .rv {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .65s var(--ease), transform .65s var(--ease);
+    }
+    .rv.in { opacity: 1; transform: translateY(0); }
+    .rv-d1 { transition-delay: .1s; }
+    .rv-d2 { transition-delay: .2s; }
+    .rv-d3 { transition-delay: .3s; }
+    .rv-d4 { transition-delay: .4s; }
+    .rv-d5 { transition-delay: .5s; }
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+    @media (max-width: 1024px) {
+      .prod-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; gap: 52px; }
+      .about-image { max-width: 480px; }
+      .feat-grid { grid-template-columns: 1fr; }
+      .feat-side { flex-direction: row; }
+      .feat-side-card { flex: 1; }
+      .contact-grid { grid-template-columns: 1fr; gap: 52px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+    @media (max-width: 768px) {
+      section { padding: 72px 0; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-h1 { font-size: clamp(2.4rem, 10vw, 3.5rem); }
+      .hero-numbers { display: none; }
+      .prod-head { flex-direction: column; align-items: flex-start; gap: 14px; }
+      .about-feats { grid-template-columns: 1fr; }
+      .about-card { left: 12px; bottom: -14px; }
+      .feat-side { flex-direction: column; }
+      .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .container { padding: 0 18px; }
+      .hero-btns { flex-direction: column; align-items: flex-start; }
+      .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+      .prod-grid { grid-template-columns: 1fr; }
+    }
+
+    /* =====================================================
+       BRAND FILTER TABS
+    ===================================================== */
+    .brand-tabs {
+      display: flex; align-items: center; gap: 8px;
+      flex-wrap: wrap; margin-bottom: 52px;
+    }
+    .brand-tab {
+      padding: 9px 22px; border-radius: 100px;
+      font-size: .8125rem; font-weight: 600;
+      border: 1.5px solid var(--border);
+      background: transparent; color: var(--text-2);
+      cursor: pointer; transition: all .25s var(--ease);
+      font-family: var(--sans); letter-spacing: -.01em;
+    }
+    .brand-tab:hover { border-color: var(--accent); color: var(--accent); }
+    .brand-tab.active { background: var(--accent); border-color: var(--accent); color: var(--white); }
+    .prod-card.hidden { display: none; }
+    .prod-brand {
+      font-size: .65rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 5px;
+    }
+
+    /* =====================================================
+       GALLERY THUMBNAILS & COLOR SWATCHES
+    ===================================================== */
+    .prod-card { display: flex; flex-direction: column; }
+    .prod-main-img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform .65s var(--ease), opacity .18s ease;
+    }
+    .prod-card:hover .prod-main-img { transform: scale(1.06); }
+    .prod-hover-btn {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--white);
+      color: var(--text);
+      padding: 11px 22px;
+      border-radius: 100px;
+      font-size: .8125rem;
+      font-weight: 600;
+      text-decoration: none;
+      transform: translateY(8px);
+      transition: transform .3s var(--ease), background .2s;
+    }
+    .prod-hover-btn:hover { background: var(--accent); color: var(--white); }
+    .prod-card:hover .prod-hover-btn { transform: translateY(0); }
+
+    .prod-gallery-strip {
+      display: flex; gap: 5px;
+      padding: 8px 10px 6px;
+      background: var(--bg-card);
+      min-height: 56px;
+    }
+    .gallery-thumb {
+      flex: 1; aspect-ratio: 1;
+      border-radius: 5px; overflow: hidden;
+      border: 1.5px solid var(--border);
+      cursor: pointer; background: none; padding: 0;
+      transition: border-color .2s, transform .2s;
+      min-width: 0; flex-shrink: 1;
+    }
+    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .gallery-thumb.active { border-color: var(--accent); transform: scale(1.04); }
+    .gallery-thumb:hover:not(.active) { border-color: var(--text-3); }
+
+    .prod-colors {
+      display: flex; align-items: center; gap: 7px;
+      flex-wrap: wrap; margin: 0 0 4px;
+      min-height: 22px;
+    }
+    .color-swatch {
+      width: 17px; height: 17px; border-radius: 50%;
+      border: 1.5px solid var(--border);
+      cursor: pointer; padding: 0; outline: none;
+      transition: transform .2s, border-color .2s, box-shadow .2s;
+      flex-shrink: 0;
+    }
+    .color-swatch:hover { transform: scale(1.18); border-color: var(--text-3); }
+    .color-swatch.active {
+      border-color: var(--accent);
+      transform: scale(1.3);
+      box-shadow: 0 0 0 2.5px rgba(194,116,138,.22);
+    }
+    .prod-color-label {
+      font-size: .67rem; color: var(--text-3);
+      text-transform: uppercase; letter-spacing: .1em;
+      font-weight: 600; margin-bottom: 10px; min-height: 13px;
+    }
+    .prod-info { flex: 1; display: flex; flex-direction: column; }
+    .prod-desc { flex: 1; }
+
+    /* =====================================================
+       SEARCH / FIND YOUR BAG BANNER
+    ===================================================== */
+    .search-banner {
+      background: linear-gradient(135deg, var(--bg-dark) 0%, #2C1820 100%);
+      padding: 96px 0; position: relative; overflow: hidden;
+    }
+    .search-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 72% 50%, rgba(194,116,138,.2) 0%, transparent 58%);
+      pointer-events: none;
+    }
+    .sb-grid {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 72px; align-items: center;
+    }
+    .sb-label { color: var(--accent-lt) !important; }
+    .sb-label::before { background: var(--accent-lt) !important; }
+    .sb-title {
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 3.2vw, 2.8rem);
+      font-weight: 800; color: var(--white);
+      line-height: 1.1; letter-spacing: -.035em;
+      margin: 14px 0 20px;
+    }
+    .sb-title em { color: var(--accent-lt); font-style: italic; }
+    .sb-desc {
+      font-size: 1.0625rem; color: rgba(255,255,255,.62);
+      line-height: 1.8; font-weight: 300; margin-bottom: 36px;
+    }
+    .sb-img-wrap {
+      border-radius: var(--r-lg); overflow: hidden;
+      aspect-ratio: 4/3; position: relative;
+    }
+    .sb-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .sb-deco {
+      position: absolute; top: -22px; left: -22px;
+      width: 170px; height: 170px;
+      border: 1.5px solid rgba(194,116,138,.22);
+      border-radius: var(--r-lg); pointer-events: none;
+    }
+    .sb-deco2 {
+      position: absolute; bottom: -14px; right: -14px;
+      width: 80px; height: 80px;
+      border: 1.5px solid rgba(194,116,138,.18);
+      border-radius: var(--r); pointer-events: none;
+    }
+    @media (max-width: 768px) {
+      .sb-grid { grid-template-columns: 1fr; gap: 44px; }
+      .brand-tabs { gap: 6px; }
+      .brand-tab { padding: 7px 14px; font-size: .75rem; }
+    }
+
+    /* =====================================================
+       CART · CHECKOUT · TOAST
+    ===================================================== */
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .cart-btn {
+      position: relative; width: 40px; height: 40px; border-radius: 10px;
+      border: 1.5px solid var(--border); background: transparent; color: var(--text);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      transition: border-color .2s, background .2s;
+    }
+    .cart-btn:hover { border-color: var(--accent); background: rgba(194,116,138,.06); }
+    .cart-count {
+      position: absolute; top: -6px; right: -6px;
+      background: var(--accent); color: var(--white);
+      font-size: .6rem; font-weight: 700; min-width: 17px; height: 17px;
+      border-radius: 100px; display: flex; align-items: center; justify-content: center; padding: 0 4px;
+    }
+    .cart-overlay, .modal-overlay {
+      position: fixed; inset: 0; background: rgba(26,23,20,.5);
+      opacity: 0; pointer-events: none; transition: opacity .3s var(--ease);
+    }
+    .cart-overlay { z-index: 1310; }
+    .modal-overlay { z-index: 1100; }
+    .cart-overlay.open, .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .cart-drawer {
+      position: fixed; top: 0; right: 0; bottom: 0; width: min(400px, 100vw);
+      background: var(--bg); z-index: 1311; display: flex; flex-direction: column;
+      transform: translateX(100%); transition: transform .38s var(--ease);
+      box-shadow: -8px 0 40px rgba(26,23,20,.14);
+    }
+    .cart-drawer.open { transform: translateX(0); }
+    .cart-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 24px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+    }
+    .cart-title { font-family: var(--serif); font-size: 1.2rem; font-weight: 700; letter-spacing: -.025em; }
+    .cart-close, .modal-close {
+      width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-2); font-size: .9rem; transition: background .2s, color .2s;
+    }
+    .cart-close:hover, .modal-close:hover { background: var(--bg-dark); color: var(--white); }
+    .cart-empty {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      flex: 1; text-align: center; color: var(--text-3); padding: 40px 24px;
+    }
+    .cart-empty[hidden] { display: none; }
+    .cart-empty-icon { font-size: 3rem; margin-bottom: 14px; }
+    .cart-items { flex: 1; overflow-y: auto; padding: 16px 24px; display: flex; flex-direction: column; gap: 12px; }
+    .cart-item {
+      display: flex; gap: 12px; padding: 14px;
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r);
+    }
+    .cart-item-img { width: 68px; height: 68px; border-radius: 8px; overflow: hidden; flex-shrink: 0; background: var(--bg-cream); }
+    .cart-item-img img { width: 100%; height: 100%; object-fit: cover; }
+    .cart-item-info { flex: 1; min-width: 0; }
+    .cart-item-name { font-family: var(--serif); font-size: .875rem; font-weight: 700; letter-spacing: -.02em; line-height: 1.3; margin-bottom: 2px; }
+    .cart-item-color { font-size: .7rem; color: var(--text-3); text-transform: uppercase; letter-spacing: .08em; font-weight: 600; margin-bottom: 8px; }
+    .cart-item-foot { display: flex; align-items: center; gap: 8px; }
+    .cart-item-price { font-family: var(--serif); font-size: .875rem; font-weight: 700; flex: 1; }
+    .qty-control { display: flex; align-items: center; gap: 5px; }
+    .qty-btn {
+      width: 24px; height: 24px; border-radius: 6px; border: 1.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem; font-weight: 700; color: var(--text);
+      transition: border-color .2s, background .2s;
+    }
+    .qty-btn:hover { border-color: var(--accent); background: rgba(194,116,138,.08); }
+    .qty-num { font-size: .875rem; font-weight: 600; min-width: 18px; text-align: center; }
+    .cart-item-remove { color: var(--text-3); font-size: .75rem; padding: 3px 5px; border-radius: 5px; transition: color .2s, background .2s; }
+    .cart-item-remove:hover { color: #e05260; background: rgba(224,82,96,.08); }
+    .cart-footer {
+      padding: 18px 24px; border-top: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 10px; flex-shrink: 0;
+    }
+    .cart-footer[hidden] { display: none; }
+    .cart-total-row { display: flex; justify-content: space-between; align-items: center; font-size: .9375rem; font-weight: 600; }
+    .cart-total-amount { font-family: var(--serif); font-size: 1.1rem; font-weight: 800; color: var(--accent); }
+    .btn-checkout {
+      width: 100%; padding: 13px; background: var(--bg-dark); color: var(--white);
+      border-radius: 100px; font-size: .875rem; font-weight: 600; font-family: var(--sans);
+      transition: background .25s;
+    }
+    .btn-checkout:hover { background: var(--accent); }
+    .btn-wa-cart {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 11px; background: var(--wa); color: var(--white); border-radius: 100px;
+      font-size: .8rem; font-weight: 600; font-family: var(--sans);
+      transition: background .25s; border: none; cursor: pointer;
+    }
+    .btn-wa-cart:hover { background: var(--wa-h); }
+    /* ===== CHECKOUT PAGE ===== */
+    .ck-page {
+      position: fixed; inset: 0; z-index: 1350;
+      background: var(--bg);
+      transform: translateX(100%);
+      transition: transform .42s var(--ease);
+      overflow-y: auto; overflow-x: hidden;
+    }
+    .ck-page.open { transform: translateX(0); }
+    .ck-topbar {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(253,249,248,.95); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border); padding: 14px 0;
+    }
+    .ck-topbar-inner { max-width: 1080px; margin: 0 auto; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; }
+    .ck-back { display: inline-flex; align-items: center; gap: 8px; font-size: .875rem; font-weight: 600; color: var(--text-2); padding: 8px 16px; border-radius: 100px; border: 1.5px solid var(--border); background: none; cursor: pointer; transition: border-color .2s, color .2s, background .2s; flex-shrink: 0; }
+    .ck-back:hover { border-color: var(--accent); color: var(--accent); background: rgba(194,116,138,.04); }
+    .ck-brand { font-family: var(--serif); font-size: 1.1rem; font-weight: 800; letter-spacing: -.03em; color: var(--text); }
+    .ck-container { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+    .ck-layout { display: grid; grid-template-columns: 1fr 400px; gap: 60px; align-items: start; padding: 44px 0 100px; }
+    .ck-left { display: flex; flex-direction: column; gap: 28px; }
+    .ck-title { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: 800; letter-spacing: -.04em; }
+    .ck-section { display: flex; flex-direction: column; gap: 10px; }
+    .ck-section-title { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--text-3); padding-bottom: 10px; border-bottom: 1px solid var(--border); margin-bottom: 2px; }
+    .ck-field { display: flex; flex-direction: column; }
+    .ck-field input, .ck-field select, .ck-field textarea {
+      padding: 14px 16px; border: 1.5px solid var(--border); border-radius: var(--r);
+      font-family: var(--sans); font-size: 16px; background: var(--bg-card); color: var(--text);
+      outline: none; transition: border-color .2s, box-shadow .2s; width: 100%;
+    }
+    .ck-field input:focus, .ck-field select:focus, .ck-field textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(194,116,138,.12); }
+    .ck-field textarea { resize: vertical; min-height: 72px; }
+    .ck-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .ck-ship-option { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 1.5px solid var(--border); border-radius: var(--r); cursor: pointer; transition: border-color .2s, background .2s; }
+    .ck-ship-option:has(input:checked) { border-color: var(--accent); background: rgba(194,116,138,.04); }
+    .ck-ship-option input[type="radio"] { accent-color: var(--accent); width: 18px; height: 18px; flex-shrink: 0; cursor: pointer; }
+    .ck-ship-body { display: flex; justify-content: space-between; align-items: center; flex: 1; font-size: .9375rem; }
+    .ck-ship-price { font-weight: 700; }
+    .ck-right { position: sticky; top: 84px; }
+    .ck-summary-panel { background: var(--bg-cream); border: 1.5px solid var(--border); border-radius: var(--r-lg); padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+    .ck-summary-title { font-family: var(--serif); font-size: 1rem; font-weight: 700; letter-spacing: -.02em; }
+    .ck-order-item { display: flex; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--border); transition: opacity .2s, transform .2s; }
+    .ck-order-item:last-of-type { border-bottom: none; }
+    .ck-order-thumb { width: 54px; height: 54px; border-radius: 9px; overflow: hidden; flex-shrink: 0; background: var(--bg-card); border: 1px solid var(--border); position: relative; }
+    .ck-order-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .ck-order-badge { position: absolute; top: -6px; right: -6px; background: var(--text-3); color: var(--white); border-radius: 50%; width: 18px; height: 18px; font-size: .63rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    .ck-order-meta { flex: 1; min-width: 0; }
+    .ck-order-name { font-size: .875rem; font-weight: 600; font-family: var(--serif); letter-spacing: -.02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ck-order-color { font-size: .75rem; color: var(--text-3); margin-top: 2px; }
+    .ck-order-price { font-size: .875rem; font-weight: 700; font-family: var(--serif); white-space: nowrap; }
+    .ck-order-del { background: none; border: none; cursor: pointer; color: var(--text-3); padding: 4px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: color .2s, background .2s; }
+    .ck-order-del:hover { color: #e05260; background: rgba(224,82,96,.08); }
+    .ck-sum-lines { display: flex; flex-direction: column; gap: 8px; }
+    .ck-sum-row { display: flex; justify-content: space-between; align-items: center; font-size: .875rem; color: var(--text-2); }
+    .ck-sum-total-row { display: flex; justify-content: space-between; align-items: center; font-size: 1rem; font-weight: 800; color: var(--text); padding-top: 12px; border-top: 1.5px solid var(--border); }
+    .ck-btn-submit { width: 100%; padding: 16px; background: var(--bg-dark); color: var(--white); border-radius: 100px; font-size: 1rem; font-weight: 700; font-family: var(--sans); border: none; cursor: pointer; transition: background .25s; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .ck-btn-submit:hover { background: var(--accent); }
+    .ck-btn-submit:disabled { opacity: .6; cursor: not-allowed; }
+    @media (max-width: 860px) {
+      .ck-layout { grid-template-columns: 1fr; gap: 0; padding: 24px 0 100px; }
+      .ck-right { position: static; order: -1; }
+      .ck-summary-panel { border-radius: var(--r); margin-bottom: 28px; }
+    }
+    @media (max-width: 480px) {
+      .ck-row { grid-template-columns: 1fr; }
+      .ck-topbar-inner, .ck-container { padding: 0 16px; }
+    }
+    .sinpe-box {
+      background: linear-gradient(135deg, rgba(194,116,138,.08), rgba(194,116,138,.03));
+      border: 1.5px solid rgba(194,116,138,.25); border-radius: var(--r); padding: 16px 18px;
+    }
+    .sinpe-label { font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .sinpe-name { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; letter-spacing: -.02em; margin-bottom: 4px; }
+    .sinpe-number { font-family: var(--serif); font-size: 1.5rem; font-weight: 800; color: var(--accent); letter-spacing: .03em; margin-bottom: 10px; }
+    .sinpe-note { font-size: .8125rem; color: var(--text-2); line-height: 1.6; }
+    .sinpe-note a { color: var(--accent); font-weight: 600; }
+    .toast-container { position: fixed; bottom: 92px; right: 22px; z-index: 1200; display: flex; flex-direction: column-reverse; gap: 8px; pointer-events: none; }
+    .toast {
+      background: var(--bg-dark); color: var(--white);
+      padding: 11px 16px; border-radius: 9px; font-size: .83rem; font-weight: 500;
+      box-shadow: 0 6px 24px rgba(26,23,20,.22); max-width: 270px;
+      transform: translateX(120%); transition: transform .35s var(--ease); pointer-events: all;
+    }
+    .toast.show { transform: translateX(0); }
+    .toast.success { border-left: 3px solid var(--wa); }
+    .toast.error { border-left: 3px solid #e05260; }
+    .btn-add-cart {
+      display: flex; align-items: center; gap: 7px;
+      background: var(--accent); color: var(--white);
+      padding: 9px 18px; border-radius: 100px;
+      font-size: .78rem; font-weight: 600; font-family: var(--sans);
+      border: none; cursor: pointer;
+      transform: translateY(8px); transition: transform .3s var(--ease) .05s, background .2s;
+    }
+    .btn-add-cart:hover { background: var(--accent-h); }
+    .prod-card:hover .btn-add-cart { transform: translateY(0); }
+
+    /* =====================================================
+       PRODUCT PAGE
+    ===================================================== */
+    .prod-page {
+      position: fixed; inset: 0; z-index: 1300;
+      background: var(--bg);
+      transform: translateX(100%);
+      transition: transform .42s var(--ease);
+      overflow-y: auto; overflow-x: hidden;
+    }
+    .prod-page.open { transform: translateX(0); }
+    .pp-topbar {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(253,249,248,.95); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border); padding: 14px 0;
+    }
+    .pp-topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .pp-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .875rem; font-weight: 600; color: var(--text-2);
+      padding: 8px 16px; border-radius: 100px; border: 1.5px solid var(--border);
+      transition: border-color .2s, color .2s, background .2s; flex-shrink: 0;
+    }
+    .pp-back:hover { border-color: var(--accent); color: var(--accent); background: rgba(194,116,138,.04); }
+    .pp-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 52px; align-items: start; padding: 44px 0 100px; }
+    .pp-gallery { position: sticky; top: 80px; }
+    .pp-main-wrap { aspect-ratio: 4/5; border-radius: var(--r-lg); overflow: hidden; background: var(--bg-cream); }
+    .pp-main-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity .18s; }
+    .pp-thumbs { display: flex; gap: 7px; margin-top: 10px; flex-wrap: wrap; }
+    .pp-thumb {
+      width: 68px; height: 68px; border-radius: 9px; overflow: hidden;
+      border: 1.5px solid var(--border); cursor: pointer; padding: 0; background: none;
+      transition: border-color .2s, transform .2s; flex-shrink: 0;
+    }
+    .pp-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .pp-thumb.active { border-color: var(--accent); transform: scale(1.06); }
+    .pp-thumb:hover:not(.active) { border-color: var(--text-3); }
+    .pp-info { display: flex; flex-direction: column; gap: 18px; padding-top: 6px; }
+    .pp-brand-tag { font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+    .pp-name { font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 800; letter-spacing: -.04em; line-height: 1.1; }
+    .pp-price-row { display: flex; align-items: baseline; gap: 10px; }
+    .pp-price { font-family: var(--serif); font-size: 1.5rem; font-weight: 800; }
+    .pp-price-sub { font-size: .8rem; color: var(--text-3); }
+    .pp-sep { width: 100%; height: 1px; background: var(--border); }
+    .pp-color-section { display: flex; flex-direction: column; gap: 8px; }
+    .pp-color-heading { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--text-3); }
+    .pp-color-name { color: var(--text); font-weight: 600; text-transform: none; letter-spacing: 0; }
+    .pp-swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pp-swatch { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--border); cursor: pointer; padding: 0; outline: none; flex-shrink: 0; transition: transform .2s, border-color .2s, box-shadow .2s; }
+    .pp-swatch:hover { transform: scale(1.2); border-color: var(--text-3); }
+    .pp-swatch.active { border-color: var(--accent); transform: scale(1.28); box-shadow: 0 0 0 3px rgba(194,116,138,.2); }
+    .pp-desc { font-size: .9375rem; color: var(--text-2); line-height: 1.75; font-weight: 300; }
+    .pp-qty-label { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--text-3); margin-bottom: 6px; }
+    .pp-qty-ctrl { display: inline-flex; align-items: center; border: 1.5px solid var(--border); border-radius: 100px; overflow: hidden; }
+    .pp-qty-btn { width: 40px; height: 40px; font-size: 1.1rem; font-weight: 700; color: var(--text); background: none; border: none; cursor: pointer; transition: background .2s; display: flex; align-items: center; justify-content: center; }
+    .pp-qty-btn:hover { background: rgba(194,116,138,.08); }
+    .pp-qty-num { min-width: 36px; text-align: center; font-size: .9375rem; font-weight: 700; font-family: var(--serif); }
+    .pp-actions { display: flex; flex-direction: column; gap: 10px; }
+    .pp-btn-cart { width: 100%; padding: 15px; background: var(--bg-dark); color: var(--white); border-radius: 100px; font-size: .9375rem; font-weight: 600; font-family: var(--sans); border: none; cursor: pointer; transition: background .25s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .pp-btn-cart:hover { background: var(--accent); }
+    .pp-btn-wa { width: 100%; padding: 14px; background: var(--wa); color: var(--white); border-radius: 100px; font-size: .9375rem; font-weight: 600; font-family: var(--sans); border: none; cursor: pointer; transition: background .25s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .pp-btn-wa:hover { background: var(--wa-h); }
+    .pp-btn-buy-now { width: 100%; padding: 15px; background: var(--accent); color: var(--white); border-radius: 100px; font-size: .9375rem; font-weight: 700; font-family: var(--sans); border: none; cursor: pointer; transition: background .25s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .pp-btn-buy-now:hover { background: var(--accent-h); }
+    .btn-buy-now { display: flex; align-items: center; gap: 7px; background: var(--bg-dark); color: var(--white); padding: 9px 18px; border-radius: 100px; font-size: .78rem; font-weight: 600; font-family: var(--sans); border: none; cursor: pointer; transform: translateY(8px); transition: transform .3s var(--ease) .08s, background .2s; }
+    .btn-buy-now:hover { background: var(--accent); }
+    .prod-card:hover .btn-buy-now { transform: translateY(0); }
+    .pp-sinpe { background: linear-gradient(135deg, rgba(194,116,138,.08), rgba(194,116,138,.03)); border: 1.5px solid rgba(194,116,138,.2); border-radius: var(--r); padding: 14px 16px; font-size: .8125rem; color: var(--text-2); line-height: 1.7; }
+    .pp-sinpe strong { color: var(--accent); }
+    .pp-sinpe a { color: var(--accent); font-weight: 600; }
+    .pp-related { padding: 48px 0 60px; border-top: 1px solid var(--border); }
+    .pp-related-title { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; letter-spacing: -.03em; margin-bottom: 24px; }
+    .pp-related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .pp-rel-card { cursor: pointer; border-radius: var(--r); overflow: hidden; border: 1px solid var(--border); background: var(--bg-card); transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s; }
+    .pp-rel-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(26,23,20,.09); border-color: transparent; }
+    .pp-rel-img { aspect-ratio: 1; overflow: hidden; background: var(--bg-cream); }
+    .pp-rel-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
+    .pp-rel-card:hover .pp-rel-img img { transform: scale(1.06); }
+    .pp-rel-name { font-size: .8125rem; font-weight: 600; padding: 10px 12px 8px; font-family: var(--serif); letter-spacing: -.02em; }
+    @media (max-width: 900px) {
+      .pp-grid { grid-template-columns: 1fr; gap: 32px; padding: 28px 0 80px; }
+      .pp-gallery { position: static; }
+      .pp-related-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .pp-thumbs { gap: 5px; }
+      .pp-thumb { width: 56px; height: 56px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SVG icon defs (reutilizados en toda la página) -->
+<svg style="display:none" aria-hidden="true">
+  <defs>
+    <symbol id="ico-wa" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ===================================================
+     NAVBAR
+=================================================== -->
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#inicio" class="nav-logo">
+        <img src="Logo/Logo BagsStation.jpeg" alt="Bags Station CR" class="nav-logo-img" loading="eager" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#contacto" class="nav-cta">Contacto</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="cart-btn" id="cartBtn" aria-label="Carrito">
+          <svg width="19" height="19" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          <span class="cart-count" id="cartCount" hidden>0</span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <a href="#inicio"    class="mob-link">Inicio</a>
+  <a href="#productos" class="mob-link">Productos</a>
+  <a href="#nosotros"  class="mob-link">Nosotros</a>
+  <a href="#contacto"  class="mob-link">Contacto</a>
+</div>
+
+<!-- ===================================================
+     HERO
+=================================================== -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-bg-img"></div>
+  <div class="hero-grad"></div>
+
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-pill">Nueva Colección 2025</div>
+      <h1 class="hero-h1">
+        Tu bolso,<br>
+        tu <em>historia</em>
+      </h1>
+      <p class="hero-sub">
+        Bolsos y accesorios diseñados para mujeres que viven sin límites.
+        Calidad premium, estilo propio — entregados en toda Costa Rica.
+      </p>
+      <div class="hero-btns">
+        <a href="#productos" class="btn-primary">
+          Ver colección
+          <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%20saber%20m%C3%A1s%20sobre%20sus%20productos%20%F0%9F%91%9C" target="_blank" rel="noopener" class="btn-ghost">
+          Hablar con nosotras
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-numbers">
+    <div class="container">
+      <div class="hn-item">
+        <div class="hn-num">200+</div>
+        <div class="hn-label">Modelos</div>
+      </div>
+      <div class="hn-item">
+        <div class="hn-num">5★</div>
+        <div class="hn-label">Valoración</div>
+      </div>
+      <div class="hn-item">
+        <div class="hn-num">CR</div>
+        <div class="hn-label">Costa Rica</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ===================================================
+     MARQUEE
+=================================================== -->
+<div class="marquee-band">
+  <div class="marquee-track">
+    <div class="marquee-item"><span>Calidad Premium</span><div class="mq-dot"></div></div>
+    <div class="marquee-item"><span>Diseño Exclusivo</span><div class="mq-dot"></div></div>
+    <div class="marquee-item"><span>Envíos a todo CR</span><div class="mq-dot"></div></div>
+    <div class="marquee-item"><span>Materiales Selectos</span><div class="mq-dot"></div></div>
+    <div class="marquee-item"><span>Tendencias 2025</span><div class="mq-dot"></div></div>
+    <div class="marquee-item"><span>Atención Personalizada</span><div class="mq-dot"></div></div>
+    <div class="marquee-item"><span>Pagos Seguros</span><div class="mq-dot"></div></div>
+    <!-- duplicado para loop seamless -->
+    <div class="marquee-item"><span>Calidad Premium</span><div class="mq-dot"></div></div>
+    <div class="marquee-item"><span>Diseño Exclusivo</span><div class="mq-dot"></div></div>
+    <div class="marquee-item"><span>Envíos a todo CR</span><div class="mq-dot"></div></div>
+    <div class="marquee-item"><span>Materiales Selectos</span><div class="mq-dot"></div></div>
+    <div class="marquee-item"><span>Tendencias 2025</span><div class="mq-dot"></div></div>
+    <div class="marquee-item"><span>Atención Personalizada</span><div class="mq-dot"></div></div>
+    <div class="marquee-item"><span>Pagos Seguros</span><div class="mq-dot"></div></div>
+  </div>
+</div>
+
+<!-- ===================================================
+     PRODUCTOS
+=================================================== -->
+<section id="productos">
+  <div class="container">
+
+    <div class="prod-head">
+      <div class="prod-head-left">
+        <div class="s-label rv">Catálogo de marcas</div>
+        <h2 class="s-title rv rv-d1">Las marcas que<br>todas <em>desean</em></h2>
+        <p class="s-desc rv rv-d2">Coach, Longchamp, Chanel, Dior y más — bolsos auténticos de las mejores marcas del mundo, disponibles en Costa Rica.</p>
+      </div>
+      <a href="https://wa.me/50660844697?text=Hola!%20%C2%BFPodr%C3%ADan%20mostrarme%20todos%20los%20productos%20disponibles%3F%20%F0%9F%91%9C" target="_blank" rel="noopener" class="link-all rv">
+        Ver todos
+        <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <!-- Filtros por marca -->
+    <div class="brand-tabs rv">
+      <button class="brand-tab active" data-filter="all">Todos</button>
+      <button class="brand-tab" data-filter="coach">Coach</button>
+      <button class="brand-tab" data-filter="longchamp">Longchamp</button>
+      <button class="brand-tab" data-filter="otras">Otras Marcas</button>
+      <button class="brand-tab" data-filter="premium">Premium</button>
+    </div>
+
+    <div class="prod-grid">
+
+      <!-- ===== COACH ===== -->
+      <div class="prod-card rv" data-brand="coach" data-product="coach-teri" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Coach%20Teri*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Coach</div>
+          <div class="prod-name">Coach Teri</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">Bolso de hombro estructurado en cuero de grano. Silueta limpia, asas dobles y cierre con cremallera superior.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡35 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Coach%20Teri*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card rv rv-d1" data-brand="coach" data-product="coach-tabby26" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Coach%20Tabby%2026*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Coach</div>
+          <div class="prod-name">Coach Tabby 26</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">El icónico bolso de media luna. Compacto, versátil y lleno de personalidad — en Negro, Blanco, Beige y más colores.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡40 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Coach%20Tabby%2026*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card rv rv-d2" data-brand="coach" data-product="coach-tabby26-pq" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Coach%20Tabby%2026%20Pillow%20Quilting*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Coach</div>
+          <div class="prod-name">Coach Tabby 26 Pillow Quilting</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">Versión acolchada del icónico Tabby. Suave, moderna y completamente irresistible con su textura de nubes.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡40 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Coach%20Tabby%2026%20Pillow%20Quilting*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card rv" data-brand="coach" data-product="coach-lana" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Coach%20Lana*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Coach</div>
+          <div class="prod-name">Coach Lana</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">Mini bolso con máximo impacto. Diseño delicado y femenino en cuero suave — disponible en Brass, Café, Negro y Olive.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡40 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Coach%20Lana*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card rv rv-d1" data-brand="coach" data-product="coach-brooklyn34" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Coach%20Brooklyn%2034*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Coach</div>
+          <div class="prod-name">Coach Brooklyn 34</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">Bolso de hombro de gran formato en cuero envejecido. Para la mujer que lo tiene todo y lo lleva con gracia.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡45 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Coach%20Brooklyn%2034*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card rv rv-d2" data-brand="coach" data-product="coach-klare" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Coach%20Klare*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Coach</div>
+          <div class="prod-name">Coach Klare</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">Crossbody moderno con cadena dorada y correa ajustable. Pasa del día a la noche con facilidad y elegancia.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡30 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Coach%20Klare*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card rv" data-brand="coach" data-product="coach-north-tote" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Coach%20North%20Tote*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Coach</div>
+          <div class="prod-name">Coach North Tote</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">Tote de trabajo con interior organizado y bolsillos estratégicos. Sofisticado por fuera, inteligente por dentro.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡45 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Coach%20North%20Tote*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card rv rv-d1" data-brand="coach" data-product="coach-tote" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Coach%20Tote%20Bag*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Coach</div>
+          <div class="prod-name">Coach Tote Bag</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">Tote espacioso y funcional sin sacrificar el estilo. Tu aliado perfecto para los días más ocupados y activos.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡40 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Coach%20Tote%20Bag*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== LONGCHAMP ===== -->
+      <div class="prod-card rv" data-brand="longchamp" data-product="lc-xs" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Longchamp%20XS*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Longchamp</div>
+          <div class="prod-name">Longchamp Le Pliage XS</div>
+          <div class="prod-badge-inline" style="display:inline-block;background:var(--bg-dark);color:#fff;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-bottom:8px;">&#9733; Más vendido</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">El icónico Le Pliage en su tamaño más compacto — en 8 colores vibrantes. Ligero, resistente, siempre a la moda.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡25 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Longchamp%20XS*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card rv rv-d1" data-brand="longchamp" data-product="lc-s" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Longchamp%20S*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Longchamp</div>
+          <div class="prod-name">Longchamp Le Pliage S</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">Tamaño pequeño ideal para el día a día. Cabe todo lo esencial con ese estilo francés que enamora.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡30 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Longchamp%20S*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card rv rv-d2" data-brand="longchamp" data-product="lc-m" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Longchamp%20M*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Longchamp</div>
+          <div class="prod-name">Longchamp Le Pliage M</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">El tamaño ideal para viajeras y aventureras. Ligero como una nube, plegable para llevar a donde quieras.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡35 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Longchamp%20M*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card rv" data-brand="longchamp" data-product="lc-l" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Longchamp%20L*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Longchamp</div>
+          <div class="prod-name">Longchamp Le Pliage L</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">El grande que lo aguanta todo. Perfecto para viajes, mercado o los días más exigentes — en 5 colores.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡40 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Longchamp%20L*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== OTRAS MARCAS ===== -->
+      <div class="prod-card rv rv-d1" data-brand="otras" data-product="lacoste" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Lacoste*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Lacoste</div>
+          <div class="prod-name">Lacoste Daily Lifestyle</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">Estilo deportivo con alma premium. El sello cocodrilo sobre un diseño fresco, funcional y absolutamente moderno.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡37 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Lacoste*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card rv rv-d2" data-brand="otras" data-product="michael-kors" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Michael%20Kors*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Michael Kors</div>
+          <div class="prod-name">Michael Kors Jet Set</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">Glamour accesible en cada detalle. El bolso que eleva cualquier look al instante con elegancia americana.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡30 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Michael%20Kors*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card rv" data-brand="otras" data-product="jacquemus" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Jacquemus*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Jacquemus</div>
+          <div class="prod-name">Jacquemus Le Chiquito</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">El mini bolso más fotografiado de Instagram. Minimalismo parisino en formato diminuto con un impacto enorme.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡30 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Jacquemus*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card rv rv-d1" data-brand="otras" data-product="diesel-1dr" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Diesel%201DR*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Diesel</div>
+          <div class="prod-name">Diesel 1DR</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">El it-bag de Diesel que arrasó en todas las semanas de la moda. Actitud rockera con accesorios metálicos llamativos.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡40 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Diesel%201DR*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card rv rv-d2" data-brand="otras" data-product="miu-miu" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Miu%20Miu*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Miu Miu</div>
+          <div class="prod-name">Miu Miu Wander</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">Caprichoso, femenino y absolutamente irresistible. La pieza definitiva de Miu Miu que todas quieren tener.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡35 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Miu%20Miu*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== PREMIUM ===== -->
+      <div class="prod-card rv" data-brand="premium" data-product="chanel-flap" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Chanel%20Classic%20Flap*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Chanel</div>
+          <div class="prod-name">Chanel Classic Flap</div>
+          <div class="prod-badge-inline" style="display:inline-block;background:var(--accent);color:#fff;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-bottom:8px;">Premium</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">El bolso más soñado del mundo de la moda. Elegancia atemporal con la cadena dorada que lo dice todo.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡50 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Chanel%20Classic%20Flap*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card rv rv-d1" data-brand="premium" data-product="sl-kate" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Saint%20Laurent%20Kate*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Saint Laurent</div>
+          <div class="prod-name">Saint Laurent Kate</div>
+          <div class="prod-badge-inline" style="display:inline-block;background:var(--accent);color:#fff;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-bottom:8px;">Premium</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">Alta moda francesa al alcance de tu mano. Elegancia atemporal con la clase inigualable de la Maison YSL.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡40 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Saint%20Laurent%20Kate*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card rv rv-d2" data-brand="premium" data-product="sl-hobo" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Saint%20Laurent%20Hobo*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Saint Laurent</div>
+          <div class="prod-name">Saint Laurent Hobo</div>
+          <div class="prod-badge-inline" style="display:inline-block;background:var(--accent);color:#fff;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-bottom:8px;">Premium</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">Silueta relajada de cuero suave con la firma YSL. En Negro clásico o Red Wine para las noches más especiales.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡40 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Saint%20Laurent%20Hobo*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card rv" data-brand="premium" data-product="sl-icarino" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Saint%20Laurent%20Icarino*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Saint Laurent</div>
+          <div class="prod-name">Saint Laurent Icarino</div>
+          <div class="prod-badge-inline" style="display:inline-block;background:var(--accent);color:#fff;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-bottom:8px;">Premium</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">El bolso de hombro de Saint Laurent con cierre metálico icónico. Minimalismo parisino en estado puro.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡40 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Saint%20Laurent%20Icarino*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card rv rv-d1" data-brand="premium" data-product="polene" data-wa="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Pol%C3%A8ne*%20%C2%BFTienen%20disponibilidad%3F">
+        <div class="prod-img"></div>
+        <div class="prod-gallery-strip"></div>
+        <div class="prod-info">
+          <div class="prod-brand">Polène</div>
+          <div class="prod-name">Polène Cyme</div>
+          <div class="prod-badge-inline" style="display:inline-block;background:var(--accent);color:#fff;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-bottom:8px;">Premium</div>
+          <div class="prod-colors"></div>
+          <div class="prod-color-label"></div>
+          <div class="prod-desc">Minimalismo parisino en su máxima expresión. Cuero de grano completo trabajado artesanalmente en cada pieza.</div>
+          <div class="prod-foot">
+            <div class="prod-price">₡40 000<small>Envío a todo CR</small></div>
+            <a href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%3A%20*Pol%C3%A8ne*%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener" class="btn-wa"><svg width="13" height="13" fill="currentColor"><use href="#ico-wa"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /prod-grid -->
+
+  </div>
+</section>
+
+<!-- ===================================================
+     SOBRE NOSOTROS
+=================================================== -->
+<section id="nosotros">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="about-content">
+        <div class="s-label rv">Sobre nosotras</div>
+        <h2 class="s-title rv rv-d1">No vendemos bolsos.<br>Creamos ese <em>detalle</em><br>que cambia cómo te sentís.</h2>
+        <div class="about-body rv rv-d2">
+          <p>En Bags Station CR creemos en mujeres auténticas, seguras y con estilo propio. Por eso seleccionamos piezas que no solo complementan tu outfit, sino que hablan por vos incluso antes de decir una palabra.</p>
+          <p>Cada bolso fue elegido pensando en esa mezcla perfecta entre elegancia, tendencia y versatilidad; para acompañarte en días ocupados, salidas especiales y momentos donde querés verte increíble sin esfuerzo.</p>
+          <p>Somos una marca costarricense que ama la moda, los detalles y la conexión real con cada clienta. Nos mueve ofrecer accesorios con personalidad, calidad y ese toque especial que hace que siempre vuelvas por "uno más".</p>
+          <p><em>Porque cuando encontrás el bolso correcto, no solo elevás tu look… elevás tu energía.</em></p>
+        </div>
+        <div class="about-feats rv rv-d3">
+          <div class="about-feat">
+            <div class="af-icon">🎨</div>
+            <div class="af-title">Diseños únicos</div>
+            <div class="af-text">Colecciones curadas con ojo editorial y tendencias reales.</div>
+          </div>
+          <div class="about-feat">
+            <div class="af-icon">✅</div>
+            <div class="af-title">Calidad garantizada</div>
+            <div class="af-text">Materiales selectos que duran y se ven mejor con el tiempo.</div>
+          </div>
+          <div class="about-feat">
+            <div class="af-icon">🚚</div>
+            <div class="af-title">Envíos a todo CR</div>
+            <div class="af-text">Tu pedido llega a donde estés, rápido y seguro.</div>
+          </div>
+          <div class="about-feat">
+            <div class="af-icon">💬</div>
+            <div class="af-title">Atención real</div>
+            <div class="af-text">Hablamos contigo, no a través de bots. Personas reales.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-image rv rv-d2">
+        <div class="about-img-wrap">
+          <img src="Imagenes para Apartados/Apartado de Sobre Nosotras.jpg" alt="Colección Bags Station CR" loading="lazy" />
+        </div>
+        <div class="about-card">
+          <div class="ac-num">+500</div>
+          <div class="ac-text">clientas felices<br>en todo Costa Rica</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================
+     DESTACADOS
+=================================================== -->
+<section id="destacado">
+  <div class="container">
+
+    <div class="feat-header">
+      <div class="s-label rv">Lo más buscado</div>
+      <h2 class="s-title rv rv-d1">Estilos que <em>enamoran</em></h2>
+      <p class="s-desc rv rv-d2">Los favoritos de la temporada, elegidos por nuestras clientas más fieles.</p>
+    </div>
+
+    <div class="feat-grid">
+
+      <a class="feat-main rv" href="https://wa.me/50660844697?text=Hola!%20Vi%20la%20colecci%C3%B3n%20Cuero%20Premium%20y%20me%20encant%C3%B3%20%F0%9F%91%9C%20%C2%BFQu%C3%A9%20modelos%20tienen%20disponibles%3F" target="_blank" rel="noopener">
+        <img src="Imagenes%20Bolsos/Longchamp%20XS/Longchamp%20XS%20T%C3%A9%20Rosa/Longchamp%20XS%20T%C3%A9%20Rosa.webp" alt="Colección Cuero Premium" loading="lazy" />
+        <div class="feat-main-ov">
+          <div class="feat-tag">Colección estrella</div>
+          <div class="feat-main-title">Cuero Premium</div>
+          <div class="feat-main-sub">La línea que define la elegancia sin esfuerzo</div>
+        </div>
+      </a>
+
+      <div class="feat-side">
+        <a class="feat-side-card rv rv-d1" href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%20la%20l%C3%ADnea%20*Esencial%20Diario*%20%F0%9F%91%9C" target="_blank" rel="noopener">
+          <img src="Imagenes%20Bolsos/Longchamp%20XS/Longchamp%20XS%20Fresa/Longchamp%20XS%20Fresa.webp" alt="Esencial Diario" loading="lazy" />
+          <div class="feat-side-ov">
+            <div class="feat-side-title">Esencial Diario</div>
+            <div class="feat-side-sub">Funcional y elegante, siempre</div>
+          </div>
+        </a>
+        <a class="feat-side-card rv rv-d2" href="https://wa.me/50660844697?text=Hola!%20Me%20interesa%20la%20l%C3%ADnea%20*Noche%20Especial*%20%E2%9C%A8" target="_blank" rel="noopener">
+          <img src="Imagenes%20Bolsos/Saint%20Laurent/Saint%20Laurent%20Negro.avif" alt="Noche Especial" loading="lazy" />
+          <div class="feat-side-ov">
+            <div class="feat-side-title">Noche Especial</div>
+            <div class="feat-side-sub">Para los momentos que importan</div>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================
+     BUSCA TU BOLSO IDEAL
+=================================================== -->
+<section class="search-banner">
+  <div class="container">
+    <div class="sb-grid">
+
+      <div class="sb-content rv">
+        <div class="s-label sb-label">Servicio especial</div>
+        <h2 class="sb-title">
+          ¿Buscas un bolso<br>
+          en <em>específico</em>?
+        </h2>
+        <p class="sb-desc">
+          En nuestra tienda nos encargamos de conseguirlo por ti. Solo envíanos imágenes de referencia y nosotros lo encontramos — sin complicaciones, con atención personalizada.
+        </p>
+        <a href="https://wa.me/50660844697?text=Hola!%20Estoy%20buscando%20un%20bolso%20espec%C3%ADfico%20y%20quisiera%20su%20ayuda%20para%20encontrarlo.%20Les%20env%C3%ADo%20las%20im%C3%A1genes%20de%20referencia%20%F0%9F%91%9C" target="_blank" rel="noopener" class="btn-primary">
+          Enviar referencia por WhatsApp
+          <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="rv rv-d1" style="position:relative;">
+        <div class="sb-deco"></div>
+        <div class="sb-img-wrap">
+          <img src="Imagenes para Apartados/Apartado buscas un bolso en especifico.webp" alt="Encuentra tu bolso ideal" loading="lazy" />
+        </div>
+        <div class="sb-deco2"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================
+     CONTACTO
+=================================================== -->
+<section id="contacto">
+  <div class="container">
+    <div class="contact-grid">
+
+      <div class="contact-content">
+        <div class="s-label rv">Hablemos</div>
+        <h2 class="s-title rv rv-d1">¿Lista para encontrar<br>tu <em>favorito</em>?</h2>
+        <p class="s-desc rv rv-d2">
+          Estamos a un mensaje de distancia. Escribinos por WhatsApp y te asesoramos con gusto — sin presión, con mucho estilo.
+        </p>
+        <div class="contact-opts rv rv-d3">
+          <a class="c-btn wa-btn" href="https://wa.me/50660844697?text=Hola!%20%F0%9F%91%9C%20Quisiera%20ver%20los%20bolsos%20disponibles%20y%20recibir%20asesor%C3%ADa." target="_blank" rel="noopener">
+            <div class="c-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </div>
+            <div class="c-info">
+              <div class="c-title">Escríbenos por WhatsApp</div>
+              <div class="c-sub">+506 6084-4697 · Respuesta rápida</div>
+            </div>
+            <div class="c-arr">›</div>
+          </a>
+          <a class="c-btn" href="https://www.instagram.com/bagstationcr" target="_blank" rel="noopener">
+            <div class="c-icon" style="background: linear-gradient(135deg, rgba(225,48,108,.12), rgba(193,53,132,.08));">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C13584" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <circle cx="12" cy="12" r="3.5"></circle>
+                <circle cx="17.5" cy="6.5" r="1" fill="#C13584" stroke="none"></circle>
+              </svg>
+            </div>
+            <div class="c-info">
+              <div class="c-title">Síguenos en Instagram</div>
+              <div class="c-sub">@bagstationcr · Novedades diarias</div>
+            </div>
+            <div class="c-arr" style="color: var(--text-3);">›</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-image rv rv-d2">
+        <div class="contact-img-wrap">
+          <img src="Imagenes para Apartados/Apartado Lista para encontrar tu favorito.jpg" alt="Bags Station CR" loading="lazy" />
+        </div>
+        <div class="review-float">
+          <div class="stars">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+          <div class="review-text">"El bolso llegó perfectísimo, mejor de lo que esperaba. ¡100% recomendado!"</div>
+          <div class="review-name">— Valeria M., San José CR</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================
+     FOOTER
+=================================================== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <div class="nav-logo footer-brand-logo">
+          <img src="Logo/Logo BagsStation.jpeg" alt="Bags Station CR" class="nav-logo-img" loading="lazy" />
+        </div>
+        <p class="footer-desc">Bolsos y accesorios premium para mujeres que expresan su estilo sin límites. Hechos para brillar, cada día.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/bagstationcr" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <circle cx="12" cy="12" r="3.5"></circle>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle>
+            </svg>
+          </a>
+          <a href="https://wa.me/50660844697" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@bagstationcr" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.29 6.29 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.54V6.78a4.85 4.85 0 01-1.02-.09z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Navegación</div>
+        <ul class="footer-links">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#productos">Productos</a></li>
+          <li><a href="#nosotros">Sobre nosotras</a></li>
+          <li><a href="#destacado">Destacados</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Contacto</div>
+        <ul class="footer-links">
+          <li><a href="https://wa.me/50660844697" target="_blank" rel="noopener">WhatsApp: +506 6084-4697</a></li>
+          <li><a href="https://www.instagram.com/bagstationcr" target="_blank" rel="noopener">@bagstationcr</a></li>
+          <li><a href="#productos">Ver catálogo</a></li>
+          <li><a href="https://wa.me/50660844697?text=Hola!%20Tengo%20una%20consulta%20sobre%20env%C3%ADos." target="_blank" rel="noopener">Envíos a todo CR</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Bags Station CR · Todos los derechos reservados · Costa Rica 🇨🇷</p>
+      <p class="footer-copy">Diseñado con amor para mujeres con estilo</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================================================
+     FLOATING WhatsApp BUTTON
+=================================================== -->
+<a class="fab-wa" href="https://wa.me/50660844697?text=Hola!%20%F0%9F%91%9C%20Quisiera%20ver%20los%20bolsos%20disponibles." target="_blank" rel="noopener" aria-label="WhatsApp">
+  <div class="fab-pulse"></div>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ===================================================
+     CART DRAWER
+=================================================== -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Carrito de compras">
+  <div class="cart-header">
+    <h3 class="cart-title">Mi carrito</h3>
+    <button class="cart-close" id="cartClose" aria-label="Cerrar carrito">✕</button>
+  </div>
+  <div class="cart-empty" id="cartEmpty">
+    <div class="cart-empty-icon">🛍️</div>
+    <p>Tu carrito está vacío</p>
+    <button id="cartEmptyBrowse" class="btn-primary" style="margin-top:16px;font-size:.875rem;padding:12px 26px;">Ver productos</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer" id="cartFooter" hidden>
+    <div class="cart-total-row">
+      <span>Total</span>
+      <span class="cart-total-amount" id="cartTotal">₡0</span>
+    </div>
+    <button class="btn-checkout" id="checkoutBtn">Finalizar pedido</button>
+    <button class="btn-wa-cart" id="cartWaBtn">
+      <svg width="14" height="14" fill="currentColor" aria-hidden="true"><use href="#ico-wa"/></svg>
+      Pedir directo por WhatsApp
+    </button>
+  </div>
+</aside>
+
+<!-- CHECKOUT PAGE -->
+<div id="checkoutPage" class="ck-page" role="dialog" aria-modal="true" aria-labelledby="ckPageTitle">
+  <div class="ck-topbar">
+    <div class="ck-topbar-inner">
+      <button class="ck-back" id="ckBackBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+        Volver
+      </button>
+      <span class="ck-brand">Bags Station CR</span>
+      <div style="width:100px"></div>
+    </div>
+  </div>
+  <div class="ck-container">
+    <div class="ck-layout">
+      <!-- FORM -->
+      <div class="ck-left">
+        <h1 class="ck-title" id="ckPageTitle">Finalizar pedido</h1>
+        <div class="ck-section">
+          <div class="ck-section-title">Contacto</div>
+          <div class="ck-field"><input type="text" id="ckEmail" placeholder="Email o teléfono" autocomplete="email" /></div>
+        </div>
+        <div class="ck-section">
+          <div class="ck-section-title">Entrega</div>
+          <div class="ck-row">
+            <div class="ck-field"><input type="text" id="ckNombre" placeholder="Nombre" autocomplete="given-name" /></div>
+            <div class="ck-field"><input type="text" id="ckApellidos" placeholder="Apellidos" autocomplete="family-name" /></div>
+          </div>
+          <div class="ck-field"><input type="text" id="ckDireccion" placeholder="Dirección" autocomplete="street-address" /></div>
+          <div class="ck-field"><input type="text" id="ckApto" placeholder="Casa / apartamento (opcional)" /></div>
+          <div class="ck-row">
+            <div class="ck-field">
+              <select id="ckProvincia">
+                <option value="">Provincia</option>
+                <option>San José</option><option>Alajuela</option><option>Cartago</option>
+                <option>Heredia</option><option>Guanacaste</option><option>Puntarenas</option><option>Limón</option>
+              </select>
+            </div>
+            <div class="ck-field"><input type="text" id="ckCiudad" placeholder="Ciudad" /></div>
+          </div>
+          <div class="ck-field"><input type="text" id="ckCodigo" placeholder="Código postal (opcional)" /></div>
+          <div class="ck-field"><textarea id="ckNotas" placeholder="Notas (opcional)"></textarea></div>
+        </div>
+        <div class="ck-section">
+          <div class="ck-section-title">Método de envío</div>
+          <label class="ck-ship-option">
+            <input type="radio" name="ckShipping" value="2500" id="ckShipGam" checked>
+            <span class="ck-ship-body"><span>Dentro del GAM</span><span class="ck-ship-price">₡2 500</span></span>
+          </label>
+          <label class="ck-ship-option">
+            <input type="radio" name="ckShipping" value="3500" id="ckShipOutGam">
+            <span class="ck-ship-body"><span>Fuera del GAM</span><span class="ck-ship-price">₡3 500</span></span>
+          </label>
+        </div>
+        <div class="sinpe-box">
+          <div class="sinpe-label">💳 Pago por SINPE Móvil</div>
+          <div class="sinpe-name">Valeria Ocampos Martínez</div>
+          <div class="sinpe-number">6105-6729</div>
+          <p class="sinpe-note">Envía el comprobante al <a href="https://instagram.com/bagstationcr" target="_blank" rel="noopener">Instagram @bagstationcr</a> o al <a href="https://wa.me/50660844697" target="_blank" rel="noopener">WhatsApp 6084-4697</a></p>
+        </div>
+        <button class="ck-btn-submit" id="sendWaOrder">
+          <svg width="18" height="18" fill="currentColor" aria-hidden="true"><use href="#ico-wa"/></svg>
+          Finalizar pedido
+        </button>
+      </div>
+      <!-- SUMMARY -->
+      <div class="ck-right">
+        <div class="ck-summary-panel">
+          <div class="ck-summary-title">Tu pedido</div>
+          <div id="ckOrderItems"></div>
+          <div class="ck-sum-lines">
+            <div class="ck-sum-row"><span>Subtotal</span><span id="ckSubtotal">₡0</span></div>
+            <div class="ck-sum-row"><span>Envío</span><span id="ckShippingCost">₡2 500</span></div>
+          </div>
+          <div class="ck-sum-total-row"><span>Total</span><span id="ckGrandTotal">₡0</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="false"></div>
+
+<!-- PRODUCT PAGE -->
+<div id="prodPage" class="prod-page" role="dialog" aria-modal="true" aria-label="Detalle de producto"></div>
+
+<!-- ===================================================
+     JAVASCRIPT
+=================================================== -->
+<script>
+  /* ---- Navbar scroll effect ---- */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  }, { passive: true });
+
+  /* ---- Mobile hamburger menu ---- */
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    hamburger.classList.toggle('active', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+    mobileNav.setAttribute('aria-hidden', !isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  document.querySelectorAll('.mob-link').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileNav.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    });
+  });
+
+  /* ---- Brand filter tabs ---- */
+  document.querySelectorAll('.brand-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.brand-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const filter = tab.dataset.filter;
+      document.querySelectorAll('.prod-card').forEach(card => {
+        if (filter === 'all' || card.dataset.brand === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  /* ---- Scroll reveal (IntersectionObserver) ---- */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.rv').forEach(el => observer.observe(el));
+
+  /* ---- Product Gallery System ---- */
+  const IMG_BASE = 'Imagenes Bolsos';
+  const GALLERY = {
+    'coach-teri': { colors: [
+      { n:'Negro',  c:'#1C1419', i:[`${IMG_BASE}/Coach Teri/Coach Teri Negro/Coach Teri Negro.webp`,`${IMG_BASE}/Coach Teri/Coach Teri Negro/Coach Teri Negro Toma 2.webp`,`${IMG_BASE}/Coach Teri/Coach Teri Negro/Coach Teri Negro Toma 3.webp`,`${IMG_BASE}/Coach Teri/Coach Teri Negro/Coach Teri Negro Toma 4.webp`]},
+      { n:'Silver', c:'#B8B8B8', i:[`${IMG_BASE}/Coach Teri/Coach Teri Silver/Coach Teri Silver.webp`,`${IMG_BASE}/Coach Teri/Coach Teri Silver/Coach Teri Silver Toma 2.webp`,`${IMG_BASE}/Coach Teri/Coach Teri Silver/Coach Teri Silver Toma 3.webp`,`${IMG_BASE}/Coach Teri/Coach Teri Silver/Coach Teri Silver Toma 4.webp`,`${IMG_BASE}/Coach Teri/Coach Teri Silver/Coach Teri Silver Toma 5.webp`]},
+      { n:'Café',   c:'#5C3D1E', i:[`${IMG_BASE}/Coach Teri/Coach Teri Café/Coach Teri Cafe.webp`,`${IMG_BASE}/Coach Teri/Coach Teri Café/Coach Teri Cafe Toma 2.webp`,`${IMG_BASE}/Coach Teri/Coach Teri Café/Coach Teri Cafe Toma 3.webp`,`${IMG_BASE}/Coach Teri/Coach Teri Café/Coach Teri Cafe Toma 4.webp`,`${IMG_BASE}/Coach Teri/Coach Teri Café/Coach Teri Cafe Toma 5.webp`]},
+      { n:'Blanco', c:'#EEEAE4', i:[`${IMG_BASE}/Coach Teri/Coach Teri Blanco/Coach Teri Blanco.webp`,`${IMG_BASE}/Coach Teri/Coach Teri Blanco/Coach Teri Blanco Toma 2.webp`,`${IMG_BASE}/Coach Teri/Coach Teri Blanco/Coach Teri Blanco Toma 3.webp`,`${IMG_BASE}/Coach Teri/Coach Teri Blanco/Coach Teri Blanco Toma 4.webp`,`${IMG_BASE}/Coach Teri/Coach Teri Blanco/Coach Teri Blanco Toma 5.webp`]},
+    ]},
+    'coach-tabby26': { colors: [
+      { n:'Negro',      c:'#1C1419', i:[`${IMG_BASE}/Coach Tabby 26/Coach Tabby 26 Negro/Coach Tabby 26 Negro.webp`,`${IMG_BASE}/Coach Tabby 26/Coach Tabby 26 Negro/Coach Tabby 26 Negro Toma 2.webp`,`${IMG_BASE}/Coach Tabby 26/Coach Tabby 26 Negro/Coach Tabby 26 Negro Toma 3.webp`,`${IMG_BASE}/Coach Tabby 26/Coach Tabby 26 Negro/Coach Tabby 26 Negro Toma 4.webp`]},
+      { n:'Blanco',     c:'#EEEAE4', i:[`${IMG_BASE}/Coach Tabby 26/Coach Tabby 26 Blanco/Coach Tabby 26 Blanco.webp`,`${IMG_BASE}/Coach Tabby 26/Coach Tabby 26 Blanco/Coach Tabby 26 Blanco Toma 2.webp`,`${IMG_BASE}/Coach Tabby 26/Coach Tabby 26 Blanco/Coach Tabby 26 Blanco Toma 3.webp`,`${IMG_BASE}/Coach Tabby 26/Coach Tabby 26 Blanco/Coach Tabby 26 Blanco Toma 4.webp`]},
+      { n:'Dark Stone', c:'#8B7E74', i:[`${IMG_BASE}/Coach Tabby 26/Coach Tabby 26 Dark Stone/Coach Tabby 26 Dark Stone.webp`,`${IMG_BASE}/Coach Tabby 26/Coach Tabby 26 Dark Stone/Coach Tabby 26 Dark Stone Toma 2.webp`,`${IMG_BASE}/Coach Tabby 26/Coach Tabby 26 Dark Stone/Coach Tabby 26 Dark Stone Toma 3.webp`,`${IMG_BASE}/Coach Tabby 26/Coach Tabby 26 Dark Stone/Coach Tabby 26 Dark Stone Toma 4.webp`]},
+      { n:'Beige',      c:'#D4B89A', i:[`${IMG_BASE}/Coach Tabby 26/Coach Tabby 26 Beige/Coach Tabby 26 Beige.webp`,`${IMG_BASE}/Coach Tabby 26/Coach Tabby 26 Beige/Coach Tabby 26 Beige Toma 2.webp`,`${IMG_BASE}/Coach Tabby 26/Coach Tabby 26 Beige/Coach Tabby 26 Beige Toma 3.webp`,`${IMG_BASE}/Coach Tabby 26/Coach Tabby 26 Beige/Coach Tabby 26 Beige Toma 4.webp`]},
+      { n:'Bluebell',   c:'#7070CC', i:[`${IMG_BASE}/Coach Tabby 26/Coach Tabby 26 Bluebell.webp`]},
+      { n:'Morado',     c:'#6B3FA0', i:[`${IMG_BASE}/Coach Tabby 26/Coach Tabby 26 Morado.webp`]},
+    ]},
+    'coach-tabby26-pq': { colors: [
+      { n:'Blanco',       c:'#EEEAE4', i:[`${IMG_BASE}/Coach Tabby 26 Pillow Quilting/Coach Tabby 26 Pillow Quilting Blanco/Coach Tabby 26 Pillow Quilting Blanco.webp`,`${IMG_BASE}/Coach Tabby 26 Pillow Quilting/Coach Tabby 26 Pillow Quilting Blanco/Coach Tabby 26 Pillow Quilting Blanco Toma 2.webp`,`${IMG_BASE}/Coach Tabby 26 Pillow Quilting/Coach Tabby 26 Pillow Quilting Blanco/Coach Tabby 26 Pillow Quilting Blanco Toma 3.webp`,`${IMG_BASE}/Coach Tabby 26 Pillow Quilting/Coach Tabby 26 Pillow Quilting Blanco/Coach Tabby 26 Pillow Quilting Blanco Toma 4.webp`]},
+      { n:'Negro-Dorado', c:'#2A2A1A', i:[`${IMG_BASE}/Coach Tabby 26 Pillow Quilting/Coach Tabby 26 Pillow Quilting Negro-Dorado/Coach Tabby 26 Pillow Quilting Negro-Dorado.webp`,`${IMG_BASE}/Coach Tabby 26 Pillow Quilting/Coach Tabby 26 Pillow Quilting Negro-Dorado/Coach Tabby 26 Pillow Quilting Negro-Dorado Toma 2.webp`,`${IMG_BASE}/Coach Tabby 26 Pillow Quilting/Coach Tabby 26 Pillow Quilting Negro-Dorado/Coach Tabby 26 Pillow Quilting Negro-Dorado Toma 3.webp`,`${IMG_BASE}/Coach Tabby 26 Pillow Quilting/Coach Tabby 26 Pillow Quilting Negro-Dorado/Coach Tabby 26 Pillow Quilting Negro-Dorado Toma 4.webp`]},
+      { n:'Café',         c:'#5C3D1E', i:[`${IMG_BASE}/Coach Tabby 26 Pillow Quilting/Coach Tabby 26 Pillow Quilting Café/Coach Tabby 26 Pillow Quilting Café.webp`,`${IMG_BASE}/Coach Tabby 26 Pillow Quilting/Coach Tabby 26 Pillow Quilting Café/Coach Tabby 26 Pillow Quilting Café Toma 2.webp`,`${IMG_BASE}/Coach Tabby 26 Pillow Quilting/Coach Tabby 26 Pillow Quilting Café/Coach Tabby 26 Pillow Quilting Café Toma 3.webp`,`${IMG_BASE}/Coach Tabby 26 Pillow Quilting/Coach Tabby 26 Pillow Quilting Café/Coach Tabby 26 Pillow Quilting Café Toma 4.webp`]},
+    ]},
+    'coach-lana': { colors: [
+      { n:'Brass',  c:'#B5A23A', i:[`${IMG_BASE}/Coach Lana/Coach Lana Brass/Coach Lana Brass.webp`,`${IMG_BASE}/Coach Lana/Coach Lana Brass/Coach Lana Brass Toma 2.webp`,`${IMG_BASE}/Coach Lana/Coach Lana Brass/Coach Lana Brass Toma 3.webp`,`${IMG_BASE}/Coach Lana/Coach Lana Brass/Coach Lana Brass Toma 4.webp`]},
+      { n:'Café',   c:'#5C3D1E', i:[`${IMG_BASE}/Coach Lana/Coach Lana Café/Coach Lana Café.webp`,`${IMG_BASE}/Coach Lana/Coach Lana Café/Coach Lana Café Toma 2.webp`,`${IMG_BASE}/Coach Lana/Coach Lana Café/Coach Lana Café Toma 3.webp`,`${IMG_BASE}/Coach Lana/Coach Lana Café/Coach Lana Café Toma 4.webp`]},
+      { n:'Negro',  c:'#1C1419', i:[`${IMG_BASE}/Coach Lana/Coach Lana Negro/Coach Lana Negro.webp`,`${IMG_BASE}/Coach Lana/Coach Lana Negro/Coach Lana Negro Toma 2.webp`,`${IMG_BASE}/Coach Lana/Coach Lana Negro/Coach Lana Negro Toma 3.webp`,`${IMG_BASE}/Coach Lana/Coach Lana Negro/Coach Lana Negro Toma 4.webp`]},
+      { n:'Olive',  c:'#6B7C45', i:[`${IMG_BASE}/Coach Lana/Coach Lana Olive/Coach Lana Olive.webp`,`${IMG_BASE}/Coach Lana/Coach Lana Olive/Coach Lana Olive Toma 2.webp`,`${IMG_BASE}/Coach Lana/Coach Lana Olive/Coach Lana Olive Toma 3.webp`,`${IMG_BASE}/Coach Lana/Coach Lana Olive/Coach Lana Olive Toma 4.webp`]},
+    ]},
+    'coach-brooklyn34': { colors: [
+      { n:'Café',  c:'#5C3D1E', i:[`${IMG_BASE}/Coach Brooklyn 34/Coach Brooklyn 34 Café/Coach Brooklyn 34 Café.webp`,`${IMG_BASE}/Coach Brooklyn 34/Coach Brooklyn 34 Café/Coach Brooklyn 34 Café Toma 2.webp`,`${IMG_BASE}/Coach Brooklyn 34/Coach Brooklyn 34 Café/Coach Brooklyn 34 Café Toma 3.webp`,`${IMG_BASE}/Coach Brooklyn 34/Coach Brooklyn 34 Café/Coach Brooklyn 34 Café Toma 4.webp`]},
+      { n:'Negro', c:'#1C1419', i:[`${IMG_BASE}/Coach Brooklyn 34/Coach Brooklyn 34 Negro/Coach Brooklyn 34 Negro.webp`,`${IMG_BASE}/Coach Brooklyn 34/Coach Brooklyn 34 Negro/Coach Brooklyn 34 Negro Toma 2.webp`,`${IMG_BASE}/Coach Brooklyn 34/Coach Brooklyn 34 Negro/Coach Brooklyn 34 Negro Toma 3.webp`,`${IMG_BASE}/Coach Brooklyn 34/Coach Brooklyn 34 Negro/Coach Brooklyn 34 Negro Toma 4.webp`]},
+    ]},
+    'coach-klare': { colors: [
+      { n:'Negro', c:'#1C1419', i:[`${IMG_BASE}/Coach Klare/Coach Klare Negro/Coach Klare Negro.webp`,`${IMG_BASE}/Coach Klare/Coach Klare Negro/Coach Klare Negro Toma 2.webp`,`${IMG_BASE}/Coach Klare/Coach Klare Negro/Coach Klare Negro Toma 3.webp`,`${IMG_BASE}/Coach Klare/Coach Klare Negro/Coach Klare Negro Toma 4.webp`]},
+    ]},
+    'coach-north-tote': { colors: [
+      { n:'Piedra Oscura', c:'#8B8275', i:[`${IMG_BASE}/Coach North Tote/Coach North Tote Piedra Oscura/Coach North Tote Piedra Oscura.webp`,`${IMG_BASE}/Coach North Tote/Coach North Tote Piedra Oscura/Coach North Tote Piedra Oscura Toma 2.webp`,`${IMG_BASE}/Coach North Tote/Coach North Tote Piedra Oscura/Coach North Tote Piedra Oscura Toma 3.webp`,`${IMG_BASE}/Coach North Tote/Coach North Tote Piedra Oscura/Coach North Tote Piedra Oscura Toma 4.webp`]},
+    ]},
+    'coach-tote': { colors: [
+      { n:'Negro',  c:'#1C1419', i:[`${IMG_BASE}/Coach Tote Bag/Coach Tote Bag Negro/Coach Tote Bag Negro.webp`,`${IMG_BASE}/Coach Tote Bag/Coach Tote Bag Negro/Coach Tote Bag Negro Toma 2.webp`,`${IMG_BASE}/Coach Tote Bag/Coach Tote Bag Negro/Coach Tote Bag Negro Toma 3.webp`,`${IMG_BASE}/Coach Tote Bag/Coach Tote Bag Negro/Coach Tote Bag Negro Toma 4.webp`]},
+      { n:'Blanco', c:'#EEEAE4', i:[`${IMG_BASE}/Coach Tote Bag/Coach Tote Bag Blanco/Coach Tote Bag Blanco.webp`,`${IMG_BASE}/Coach Tote Bag/Coach Tote Bag Blanco/Coach Tote Bag Blanco Toma 2.webp`,`${IMG_BASE}/Coach Tote Bag/Coach Tote Bag Blanco/Coach Tote Bag Blanco Toma 3.webp`,`${IMG_BASE}/Coach Tote Bag/Coach Tote Bag Blanco/Coach Tote Bag Blanco Toma 4.webp`]},
+    ]},
+    'lc-xs': { colors: [
+      { n:'Ante',        c:'#D2B48C', i:[`${IMG_BASE}/Longchamp XS/Longchamp XS Ante/Longchamp XS Ante.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Ante/Longchamp XS Ante Toma 2.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Ante/Longchamp XS Ante Toma 3.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Ante/Longchamp XS Ante Toma 4.webp`]},
+      { n:'Azul Marino', c:'#003153', i:[`${IMG_BASE}/Longchamp XS/Longchamp XS Azul Marino/Longchamp XS Azul Marino.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Azul Marino/Longchamp XS Azul Marino Toma 2.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Azul Marino/Longchamp XS Azul Marino Toma 3.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Azul Marino/Longchamp XS Azul Marino Toma 4.webp`]},
+      { n:'Fresa',       c:'#E0435A', i:[`${IMG_BASE}/Longchamp XS/Longchamp XS Fresa/Longchamp XS Fresa.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Fresa/Longchamp XS Fresa Toma 2.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Fresa/Longchamp XS Fresa Toma 3.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Fresa/Longchamp XS Fresa Toma 4.webp`]},
+      { n:'Gris Piedra', c:'#A8A9AD', i:[`${IMG_BASE}/Longchamp XS/Longchamp XS Gris Piedra/Longchamp XS Gris Piedra.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Gris Piedra/Longchamp XS Gris Piedra Toma 2.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Gris Piedra/Longchamp XS Gris Piedra Toma 3.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Gris Piedra/Longchamp XS Gris Piedra Toma 4.webp`]},
+      { n:'Negro',       c:'#1C1419', i:[`${IMG_BASE}/Longchamp XS/Longchamp XS Negro/Longchamp XS Negro.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Negro/Longchamp XS Negro Toma 2.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Negro/Longchamp XS Negro Toma 3.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Negro/Longchamp XS Negro Toma 4.webp`]},
+      { n:'Papel',       c:'#F5F0DC', i:[`${IMG_BASE}/Longchamp XS/Longchamp XS Papel/Longchamp XS Papel.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Papel/Longchamp XS Papel Toma 2.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Papel/Longchamp XS Papel Toma 3.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Papel/Longchamp XS Papel Toma 4.webp`]},
+      { n:'Pistacho',    c:'#93C572', i:[`${IMG_BASE}/Longchamp XS/Longchamp XS Pistacho/Longchamp XS Pistacho.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Pistacho/Longchamp XS Pistacho Toma 2.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Pistacho/Longchamp XS Pistacho Toma 3.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Pistacho/Longchamp XS Pistacho Toma 4.webp`]},
+      { n:'Té Rosa',     c:'#D4A5A5', i:[`${IMG_BASE}/Longchamp XS/Longchamp XS Té Rosa/Longchamp XS Té Rosa.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Té Rosa/Longchamp XS Té Rosa Toma 2.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Té Rosa/Longchamp XS Té Rosa Toma 3.webp`,`${IMG_BASE}/Longchamp XS/Longchamp XS Té Rosa/Longchamp XS Té Rosa Toma 4.webp`]},
+    ]},
+    'lc-s': { colors: [
+      { n:'Ante',        c:'#D2B48C', i:[`${IMG_BASE}/Logchamp S/Longchamp S Ante/Longchamp S Ante.webp`,`${IMG_BASE}/Logchamp S/Longchamp S Ante/Longchamp S Ante Toma 2.webp`,`${IMG_BASE}/Logchamp S/Longchamp S Ante/Longchamp S Ante Toma 3.webp`,`${IMG_BASE}/Logchamp S/Longchamp S Ante/Longchamp S Ante Toma 4.webp`,`${IMG_BASE}/Logchamp S/Longchamp S Ante/Longchamp S Ante Toma 5.webp`]},
+      { n:'Azul Marino', c:'#003153', i:[`${IMG_BASE}/Logchamp S/Longchamp S Azul Marino/Longchamp S Azul Marino.webp`,`${IMG_BASE}/Logchamp S/Longchamp S Azul Marino/Longchamp S Azul Marino Toma 2.webp`,`${IMG_BASE}/Logchamp S/Longchamp S Azul Marino/Longchamp S Azul Marino Toma 3.webp`,`${IMG_BASE}/Logchamp S/Longchamp S Azul Marino/Longchamp S Azul Marino Toma 4.webp`,`${IMG_BASE}/Logchamp S/Longchamp S Azul Marino/Longchamp S Azul Marino Toma 5.webp`]},
+      { n:'Blanco',      c:'#EEEAE4', i:[`${IMG_BASE}/Logchamp S/Longchamp S Blanco/Longchamp S Blanco.webp.png`,`${IMG_BASE}/Logchamp S/Longchamp S Blanco/Longchamp S Blanco Toma 2.webp.png`,`${IMG_BASE}/Logchamp S/Longchamp S Blanco/Longchamp S Blanco Toma 3.webp.png`,`${IMG_BASE}/Logchamp S/Longchamp S Blanco/Longchamp S Blanco Toma 4.webp.png`,`${IMG_BASE}/Logchamp S/Longchamp S Blanco/Longchamp S Blanco Toma 5.webp.png`]},
+      { n:'Negro',       c:'#1C1419', i:[`${IMG_BASE}/Logchamp S/Longchamp S Negro/Longchamp S Negro.webp.png`,`${IMG_BASE}/Logchamp S/Longchamp S Negro/Longchamp S Negro Toma 2.webp.png`,`${IMG_BASE}/Logchamp S/Longchamp S Negro/Longchamp S Negro Toma 3.webp.png`,`${IMG_BASE}/Logchamp S/Longchamp S Negro/Longchamp S Negro Toma 4.webp.png`,`${IMG_BASE}/Logchamp S/Longchamp S Negro/Longchamp S Negro Toma 5.webp.png`]},
+      { n:'Piedra',      c:'#B4AFA8', i:[`${IMG_BASE}/Logchamp S/Longchamp S Piedra/Longchamp S Piedra.png`,`${IMG_BASE}/Logchamp S/Longchamp S Piedra/Longchamp S Piedra Toma 2.png`,`${IMG_BASE}/Logchamp S/Longchamp S Piedra/Longchamp S Piedra Toma 3.png`,`${IMG_BASE}/Logchamp S/Longchamp S Piedra/Longchamp S Piedra Toma 4.png`,`${IMG_BASE}/Logchamp S/Longchamp S Piedra/Longchamp S Piedra Toma 5.png`]},
+    ]},
+    'lc-m': { colors: [
+      { n:'Negro', c:'#1C1419', i:[`${IMG_BASE}/Longchamp M/Longchamp M Negro.webp`,`${IMG_BASE}/Longchamp M/Longchamp M Negro Toma 2.webp`,`${IMG_BASE}/Longchamp M/Longchamp M Negro Toma 3.webp`,`${IMG_BASE}/Longchamp M/Longchamp M Negro Toma 4.webp`]},
+      { n:'Papel', c:'#F5F0DC', i:[`${IMG_BASE}/Longchamp M/Longchamp M Papel.webp`,`${IMG_BASE}/Longchamp M/Longchamp M Papel Toma 2.webp`,`${IMG_BASE}/Longchamp M/Longchamp M Papel Toma 3.webp`,`${IMG_BASE}/Longchamp M/Longchamp M Papel Toma 4.webp`]},
+    ]},
+    'lc-l': { colors: [
+      { n:'Ante',        c:'#D2B48C', i:[`${IMG_BASE}/Longchamp L/Longchamp L Ante/Longchamp L Ante.webp`,`${IMG_BASE}/Longchamp L/Longchamp L Ante/Longchamp L Ante Toma 2.webp`,`${IMG_BASE}/Longchamp L/Longchamp L Ante/Longchamp L Ante Toma 3.webp`,`${IMG_BASE}/Longchamp L/Longchamp L Ante/Longchamp L Ante Toma 4.webp`]},
+      { n:'Azul Marino', c:'#003153', i:[`${IMG_BASE}/Longchamp L/Longchamp L Azul Marino/Longchamp L Azul Marino.webp`,`${IMG_BASE}/Longchamp L/Longchamp L Azul Marino/Longchamp L Azul Marino Toma 2.webp`,`${IMG_BASE}/Longchamp L/Longchamp L Azul Marino/Longchamp L Azul Marino Toma 3.webp`,`${IMG_BASE}/Longchamp L/Longchamp L Azul Marino/Longchamp L Azul Marino Toma 4.webp`]},
+      { n:'Blanco',      c:'#EEEAE4', i:[`${IMG_BASE}/Longchamp L/Longchamp L Blanco/Longchamp L Blanco.webp`,`${IMG_BASE}/Longchamp L/Longchamp L Blanco/Longchamp L Blanco Toma 2.webp`,`${IMG_BASE}/Longchamp L/Longchamp L Blanco/Longchamp L Blanco Toma 3.webp`,`${IMG_BASE}/Longchamp L/Longchamp L Blanco/Longchamp L Blanco Toma 4.webp`]},
+      { n:'Negro',       c:'#1C1419', i:[`${IMG_BASE}/Longchamp L/Longchamp L Negro/Longchamp L Negro.webp`,`${IMG_BASE}/Longchamp L/Longchamp L Negro/Longchamp L Negro Toma 2.webp`,`${IMG_BASE}/Longchamp L/Longchamp L Negro/Longchamp L Negro Toma 3.webp`,`${IMG_BASE}/Longchamp L/Longchamp L Negro/Longchamp L Negro Toma 4.webp`]},
+      { n:'Té Rosa',     c:'#D4A5A5', i:[`${IMG_BASE}/Longchamp L/Longchamp L Té Rosa/Longchamp L Té Rosa.webp`,`${IMG_BASE}/Longchamp L/Longchamp L Té Rosa/Longchamp L Té Rosa Toma 2.webp`,`${IMG_BASE}/Longchamp L/Longchamp L Té Rosa/Longchamp L Té Rosa Toma 3.webp`,`${IMG_BASE}/Longchamp L/Longchamp L Té Rosa/Longchamp L Té Rosa Toma 4.webp`]},
+    ]},
+    'lacoste': { colors: [
+      { n:'Negro', c:'#1C1419', i:[`${IMG_BASE}/Lacoste/Lacoste Negro.webp`,`${IMG_BASE}/Lacoste/Lacoste Negro Toma 2.webp`,`${IMG_BASE}/Lacoste/Lacoste Negro Toma 3.webp`,`${IMG_BASE}/Lacoste/Lacoste Negro Toma 4.webp`]},
+      { n:'Rosa',  c:'#F4A0B5', i:[`${IMG_BASE}/Lacoste/Lacoste Rosa.webp`,`${IMG_BASE}/Lacoste/Lacoste Rosa Toma 2.webp`,`${IMG_BASE}/Lacoste/Lacoste Rosa Toma 3.webp`,`${IMG_BASE}/Lacoste/Lacoste Rosa Toma 4.webp`]},
+    ]},
+    'michael-kors': { colors: [
+      { n:'Marrón', c:'#6B4226', i:[`${IMG_BASE}/Michael Kors/Michael Kors Marrón.avif`,`${IMG_BASE}/Michael Kors/Michael Kors Marrón Toma 2.avif`]},
+    ]},
+    'jacquemus': { colors: [
+      { n:'Negro', c:'#1C1419', i:[`${IMG_BASE}/Jacquemus/Jacquemus Negro.webp`,`${IMG_BASE}/Jacquemus/Jacquemus Negro Toma 2.webp`,`${IMG_BASE}/Jacquemus/Jacquemus Negro Toma 3.webp`]},
+    ]},
+    'diesel-1dr': { colors: [
+      { n:'Negro', c:'#1C1419', i:[`${IMG_BASE}/Diesel 1DR/Diesel 1DR Negro.jpg`,`${IMG_BASE}/Diesel 1DR/Diesel 1DR Negro Toma 2.jpg`]},
+    ]},
+    'miu-miu': { colors: [
+      { n:'Negro', c:'#1C1419', i:[`${IMG_BASE}/Miu Miu/Miu Miu Negro.webp`,`${IMG_BASE}/Miu Miu/Miu Miu Negro Toma 2.webp`,`${IMG_BASE}/Miu Miu/Miu Miu Negro Toma 3.webp`,`${IMG_BASE}/Miu Miu/Miu Miu Negro Toma 4.webp`]},
+    ]},
+    'chanel-flap': { colors: [
+      { n:'Negro', c:'#1C1419', i:[`${IMG_BASE}/Chanel Classic Flap/Chanel Classic Flap Negro.webp`,`${IMG_BASE}/Chanel Classic Flap/Chanel Classic Flap Negro Toma 2.webp`]},
+    ]},
+    'sl-kate': { colors: [
+      { n:'Café',      c:'#5C3D1E', i:[`${IMG_BASE}/Saint Laurent/Saint Laurent Café.avif`,`${IMG_BASE}/Saint Laurent/Saint Laurent Café Toma 2.avif`,`${IMG_BASE}/Saint Laurent/Saint Laurent Café Toma 3.avif`,`${IMG_BASE}/Saint Laurent/Saint Laurent Café Toma 4.avif`]},
+      { n:'Pony Hair', c:'#2A2A2A', i:[`${IMG_BASE}/Saint Laurent/Saint Laurent Negro Pony Hair.avif`,`${IMG_BASE}/Saint Laurent/Saint Laurent Negro Pony Hair Toma 2.avif`,`${IMG_BASE}/Saint Laurent/Saint Laurent Negro Pony Hair Toma 3.avif`,`${IMG_BASE}/Saint Laurent/Saint Laurent Negro Pony Hair Toma 4.avif`]},
+      { n:'Negro',     c:'#1C1419', i:[`${IMG_BASE}/Saint Laurent/Saint Laurent Negro.avif`,`${IMG_BASE}/Saint Laurent/Saint Laurent Negro Toma 2.avif`,`${IMG_BASE}/Saint Laurent/Saint Laurent Negro Toma 3.avif`,`${IMG_BASE}/Saint Laurent/Saint Laurent Negro Toma 4.avif`]},
+    ]},
+    'sl-hobo': { colors: [
+      { n:'Negro',    c:'#1C1419', i:[`${IMG_BASE}/Saint Laurent Hobo/Saint Laurent Hobo Negro.avif`,`${IMG_BASE}/Saint Laurent Hobo/Saint Laurent Hobo Negro Toma 2.avif`,`${IMG_BASE}/Saint Laurent Hobo/Saint Laurent Hobo Negro Toma 3.avif`,`${IMG_BASE}/Saint Laurent Hobo/Saint Laurent Hobo Negro Toma 4.avif`]},
+      { n:'Red Wine', c:'#722F37', i:[`${IMG_BASE}/Saint Laurent Hobo/Saint Laurent Hobo Red Wine.avif`,`${IMG_BASE}/Saint Laurent Hobo/Saint Laurent Hobo Red Wine Toma 2.avif`,`${IMG_BASE}/Saint Laurent Hobo/Saint Laurent Hobo Red Wine Toma 3.avif`,`${IMG_BASE}/Saint Laurent Hobo/Saint Laurent Hobo Red Wine Toma 4.avif`]},
+    ]},
+    'sl-icarino': { colors: [
+      { n:'Negro', c:'#1C1419', i:[`${IMG_BASE}/Saint Laurent Icarino/Saint Laurent Icarino.avif`,`${IMG_BASE}/Saint Laurent Icarino/Saint Laurent Icarino Toma 2.avif`,`${IMG_BASE}/Saint Laurent Icarino/Saint Laurent Icarino Toma 3.avif`,`${IMG_BASE}/Saint Laurent Icarino/Saint Laurent Icarino Toma 4.avif`]},
+    ]},
+    'polene': { colors: [
+      { n:'Cyme Mini',      c:'#C4A882', i:[`${IMG_BASE}/Polene/Polene Cyme Mini.webp`]},
+      { n:'Cyme',           c:'#B89870', i:[`${IMG_BASE}/Polene/Polene Cyme.webp`]},
+      { n:'Cyme Tote',      c:'#A88060', i:[`${IMG_BASE}/Polene/Polene Cyme Tote.webp`]},
+      { n:'Neuf East West', c:'#987050', i:[`${IMG_BASE}/Polene/Polene Neuf East West.webp`]},
+    ]},
+  };
+
+  function initGallery(card) {
+    const data = GALLERY[card.dataset.product];
+    if (!data) return;
+    const imgWrap  = card.querySelector('.prod-img');
+    const strip    = card.querySelector('.prod-gallery-strip');
+    const colorsEl = card.querySelector('.prod-colors');
+    const labelEl  = card.querySelector('.prod-color-label');
+    const waHref   = card.dataset.wa || '#';
+    const nameText = (card.querySelector('.prod-name') || {textContent:''}).textContent;
+
+    const mainImg = document.createElement('img');
+    mainImg.className = 'prod-main-img';
+    mainImg.loading = 'lazy';
+    mainImg.alt = nameText;
+
+    const hov = document.createElement('div');
+    hov.className = 'prod-hover';
+
+    // Construcción segura via DOM API — evita XSS si waHref alguna vez
+    // proviene de fuente dinámica (base de datos, query param, etc.)
+    const waLink = document.createElement('a');
+    const safeHref = /^https:\/\/wa\.me\//.test(waHref) ? waHref : '#';
+    waLink.href       = safeHref;
+    waLink.target     = '_blank';
+    waLink.rel        = 'noopener noreferrer';
+    waLink.className  = 'prod-hover-btn';
+    const waIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    waIcon.setAttribute('width', '14');
+    waIcon.setAttribute('height', '14');
+    waIcon.setAttribute('fill', 'currentColor');
+    waIcon.setAttribute('aria-hidden', 'true');
+    const waUse = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    waUse.setAttribute('href', '#ico-wa');
+    waIcon.appendChild(waUse);
+    waLink.appendChild(waIcon);
+    waLink.appendChild(document.createTextNode(' Pedir por WhatsApp'));
+
+    const addBtn = document.createElement('button');
+    addBtn.className = 'btn-add-cart';
+    addBtn.innerHTML = '<svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg> Agregar al carrito';
+    addBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      const col = data.colors[activeIdx];
+      const priceEl = card.querySelector('.prod-price');
+      addToCart(card.dataset.product, nameText, col.n,
+        priceEl ? priceEl.childNodes[0].textContent.trim() : '₡0', col.i[0]);
+    });
+
+    const hovBtns = document.createElement('div');
+    hovBtns.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:8px;';
+    const buyNowBtn = document.createElement('button');
+    buyNowBtn.className = 'btn-buy-now';
+    buyNowBtn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Comprar ahora';
+    buyNowBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      const col = data.colors[activeIdx];
+      const priceEl = card.querySelector('.prod-price');
+      buyNow(card.dataset.product, nameText, col.n,
+        priceEl ? priceEl.childNodes[0].textContent.trim() : '₡0', col.i[0], 1);
+    });
+    hovBtns.appendChild(waLink);
+    hovBtns.appendChild(addBtn);
+    hovBtns.appendChild(buyNowBtn);
+    hov.appendChild(hovBtns);
+
+    imgWrap.append(mainImg, hov);
+
+    let activeIdx = 0;
+    function setColor(idx) {
+      activeIdx = idx;
+      const col  = data.colors[idx];
+      const imgs = col.i.slice(0, 5);
+
+      colorsEl.querySelectorAll('.color-swatch').forEach((s, i) => s.classList.toggle('active', i === idx));
+      if (labelEl) labelEl.textContent = col.n;
+
+      mainImg.style.opacity = '0';
+      setTimeout(() => { mainImg.src = encodeURI(imgs[0]); mainImg.style.opacity = ''; }, 150);
+
+      strip.innerHTML = '';
+      imgs.forEach((src, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'gallery-thumb' + (i === 0 ? ' active' : '');
+        btn.dataset.src = encodeURI(src);
+        const tImg = document.createElement('img');
+        tImg.src = encodeURI(src);
+        tImg.loading = 'lazy';
+        btn.appendChild(tImg);
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          strip.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+          btn.classList.add('active');
+          mainImg.style.opacity = '0';
+          setTimeout(() => { mainImg.src = btn.dataset.src; mainImg.style.opacity = ''; }, 120);
+        });
+        strip.appendChild(btn);
+      });
+    }
+
+    data.colors.forEach((col, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'color-swatch';
+      btn.style.background = col.c;
+      btn.title = col.n;
+      btn.setAttribute('aria-label', col.n);
+      btn.addEventListener('click', e => { e.stopPropagation(); setColor(idx); });
+      colorsEl.appendChild(btn);
+    });
+
+    setColor(0);
+
+    const prodFoot = card.querySelector('.prod-foot');
+    const waBtn = prodFoot ? prodFoot.querySelector('.btn-wa') : null;
+    if (prodFoot && waBtn) {
+      const ftWrap = document.createElement('div');
+      ftWrap.className = 'prod-foot-btns';
+      prodFoot.insertBefore(ftWrap, waBtn);
+      ftWrap.appendChild(waBtn);
+      const ftBuyBtn = document.createElement('button');
+      ftBuyBtn.className = 'btn-buy-now-foot';
+      ftBuyBtn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Comprar ahora';
+      ftBuyBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        const col = data.colors[activeIdx];
+        const priceEl = card.querySelector('.prod-price');
+        buyNow(card.dataset.product, nameText, col.n,
+          priceEl ? priceEl.childNodes[0].textContent.trim() : '₡0', col.i[0], 1);
+      });
+      ftWrap.appendChild(ftBuyBtn);
+    }
+  }
+
+  document.querySelectorAll('.prod-card[data-product]').forEach(initGallery);
+
+  /* ===== CART ===== */
+  let cart = JSON.parse(localStorage.getItem('bs_cart') || '[]');
+
+  function saveCart() { localStorage.setItem('bs_cart', JSON.stringify(cart)); }
+
+  function parsePrice(txt) { return parseInt(txt.replace(/[₡\s]/g, ''), 10) || 0; }
+
+  function formatPrice(n) {
+    const s = String(n);
+    return s.length > 3 ? '₡' + s.slice(0, -3) + ' ' + s.slice(-3) : '₡' + s;
+  }
+
+  function updateCartCount() {
+    const n = cart.reduce((s, i) => s + i.qty, 0);
+    const el = document.getElementById('cartCount');
+    el.textContent = n;
+    el.hidden = n === 0;
+    const ppEl = document.getElementById('ppCartCount');
+    if (ppEl) { ppEl.textContent = n; ppEl.hidden = n === 0; }
+  }
+
+  function renderCart() {
+    const itemsEl  = document.getElementById('cartItems');
+    const footerEl = document.getElementById('cartFooter');
+    const emptyEl  = document.getElementById('cartEmpty');
+    const totalEl  = document.getElementById('cartTotal');
+    const isEmpty  = cart.length === 0;
+    emptyEl.hidden  = !isEmpty;
+    footerEl.hidden = isEmpty;
+    itemsEl.innerHTML = '';
+    if (isEmpty) return;
+    let total = 0;
+    cart.forEach((item, idx) => {
+      total += item.priceNum * item.qty;
+      const el = document.createElement('div');
+      el.className = 'cart-item';
+      el.innerHTML = `
+        <div class="cart-item-img"><img src="${encodeURI(item.img)}" alt="" loading="lazy"></div>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-color">${item.color}</div>
+          <div class="cart-item-foot">
+            <div class="cart-item-price">${formatPrice(item.priceNum * item.qty)}</div>
+            <div class="qty-control">
+              <button class="qty-btn" data-idx="${idx}" data-d="-1">−</button>
+              <span class="qty-num">${item.qty}</span>
+              <button class="qty-btn" data-idx="${idx}" data-d="1">+</button>
+            </div>
+            <button class="cart-item-remove" data-idx="${idx}" aria-label="Eliminar">✕</button>
+          </div>
+        </div>`;
+      itemsEl.appendChild(el);
+    });
+    totalEl.textContent = formatPrice(total);
+    itemsEl.querySelectorAll('.qty-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const i = +btn.dataset.idx, d = +btn.dataset.d;
+        cart[i].qty = Math.max(1, cart[i].qty + d);
+        saveCart(); updateCartCount(); renderCart();
+      });
+    });
+    itemsEl.querySelectorAll('.cart-item-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        cart.splice(+btn.dataset.idx, 1);
+        saveCart(); updateCartCount(); renderCart();
+        showToast('Producto eliminado');
+      });
+    });
+  }
+
+  function openCart() {
+    renderCart();
+    document.getElementById('cartOverlay').classList.add('open');
+    document.getElementById('cartDrawer').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCart() {
+    document.getElementById('cartOverlay').classList.remove('open');
+    document.getElementById('cartDrawer').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function addToCart(id, name, color, priceText, img) {
+    const priceNum = parsePrice(priceText);
+    const found = cart.find(i => i.id === id && i.color === color);
+    if (found) { found.qty++; } else { cart.push({ id, name, color, priceNum, img, qty: 1 }); }
+    saveCart(); updateCartCount();
+    showToast('✓ ' + name + ' agregado', 'success');
+  }
+
+  function buyNow(id, name, color, priceText, img, qty) {
+    const priceNum = parsePrice(priceText);
+    const idx = cart.findIndex(i => i.id === id && i.color === color);
+    if (idx > -1) { cart[idx].qty = qty || 1; } else { cart.push({ id, name, color, priceNum, img, qty: qty || 1 }); }
+    saveCart(); updateCartCount();
+    openCheckout();
+  }
+
+  document.getElementById('cartBtn').addEventListener('click', openCart);
+  document.getElementById('cartClose').addEventListener('click', closeCart);
+  document.getElementById('cartOverlay').addEventListener('click', closeCart);
+  document.getElementById('cartEmptyBrowse').addEventListener('click', closeCart);
+
+  document.getElementById('cartWaBtn').addEventListener('click', () => {
+    if (!cart.length) return;
+    const lines = cart.map(i => `• ${i.name} (${i.color}) x${i.qty} — ${formatPrice(i.priceNum * i.qty)}`).join('\n');
+    const total = cart.reduce((s, i) => s + i.priceNum * i.qty, 0);
+    window.open('https://wa.me/50660844697?text=' + encodeURIComponent(
+      `🛍️ Pedido — Bags Station CR\n${'─'.repeat(21)}\n${lines}\n${'─'.repeat(21)}\nTotal: ${formatPrice(total)}`
+    ), '_blank');
+  });
+
+  document.getElementById('checkoutBtn').addEventListener('click', () => {
+    if (!cart.length) return;
+    closeCart();
+    setTimeout(openCheckout, 320);
+  });
+
+  /* ===== CHECKOUT ===== */
+  function ckGetShipping() {
+    const sel = document.querySelector('input[name="ckShipping"]:checked');
+    return sel ? parseInt(sel.value, 10) : 2500;
+  }
+
+  function ckUpdateSummary() {
+    let subtotal = 0;
+    const itemsEl = document.getElementById('ckOrderItems');
+    if (!itemsEl) return;
+    itemsEl.innerHTML = '';
+    cart.forEach(i => {
+      subtotal += i.priceNum * i.qty;
+      const wrap = document.createElement('div'); wrap.className = 'ck-order-item';
+      const thumbWrap = document.createElement('div'); thumbWrap.style.cssText = 'position:relative;flex-shrink:0;';
+      const thumb = document.createElement('div'); thumb.className = 'ck-order-thumb';
+      const img = document.createElement('img'); img.src = encodeURI(i.img); img.alt = i.name; img.loading = 'lazy';
+      thumb.appendChild(img);
+      const badge = document.createElement('span'); badge.className = 'ck-order-badge'; badge.textContent = i.qty;
+      thumbWrap.append(thumb, badge);
+      const meta = document.createElement('div'); meta.className = 'ck-order-meta';
+      const nm = document.createElement('div'); nm.className = 'ck-order-name'; nm.textContent = i.name;
+      const cl = document.createElement('div'); cl.className = 'ck-order-color'; cl.textContent = i.color;
+      meta.append(nm, cl);
+      const pr = document.createElement('div'); pr.className = 'ck-order-price'; pr.textContent = formatPrice(i.priceNum * i.qty);
+      const del = document.createElement('button'); del.className = 'ck-order-del'; del.setAttribute('aria-label', 'Eliminar ' + i.name);
+      del.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+      del.addEventListener('click', () => {
+        wrap.style.opacity = '0';
+        wrap.style.transform = 'translateX(12px)';
+        setTimeout(() => {
+          cart = cart.filter(c => !(c.id === i.id && c.color === i.color));
+          saveCart(); updateCartCount(); ckUpdateSummary();
+        }, 200);
+      });
+      wrap.append(thumbWrap, meta, pr, del);
+      itemsEl.appendChild(wrap);
+    });
+    const shipping = ckGetShipping();
+    const subtotalEl = document.getElementById('ckSubtotal');
+    const shippingEl = document.getElementById('ckShippingCost');
+    const totalEl    = document.getElementById('ckGrandTotal');
+    if (subtotalEl) subtotalEl.textContent = formatPrice(subtotal);
+    if (shippingEl) shippingEl.textContent = formatPrice(shipping);
+    if (totalEl)    totalEl.textContent    = formatPrice(subtotal + shipping);
+  }
+
+  function openCheckout() {
+    document.getElementById('ckShipGam').checked = true;
+    ckUpdateSummary();
+    const page = document.getElementById('checkoutPage');
+    page.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    page.scrollTop = 0;
+  }
+
+  function closeCheckout() {
+    document.getElementById('checkoutPage').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('ckBackBtn').addEventListener('click', closeCheckout);
+
+  document.querySelectorAll('input[name="ckShipping"]').forEach(r => {
+    r.addEventListener('change', ckUpdateSummary);
+  });
+
+  document.getElementById('sendWaOrder').addEventListener('click', () => {
+    const email  = document.getElementById('ckEmail').value.trim();
+    const nombre = document.getElementById('ckNombre').value.trim();
+    const apell  = document.getElementById('ckApellidos').value.trim();
+    const dir    = document.getElementById('ckDireccion').value.trim();
+    const apto   = document.getElementById('ckApto').value.trim();
+    const prov   = document.getElementById('ckProvincia').value;
+    const ciudad = document.getElementById('ckCiudad').value.trim();
+    const notas  = document.getElementById('ckNotas').value.trim();
+    if (!email || !nombre || !apell || !dir || !prov || !ciudad) { showToast('Completá todos los campos requeridos', 'error'); return; }
+    const btn = document.getElementById('sendWaOrder');
+    btn.disabled = true;
+    const lines    = cart.map(i => `• ${i.name} (${i.color}) x${i.qty} — ${formatPrice(i.priceNum * i.qty)}`).join('\n');
+    const subtotal = cart.reduce((s, i) => s + i.priceNum * i.qty, 0);
+    const shipping = ckGetShipping();
+    const shipLabel = shipping === 2500 ? 'Dentro del GAM' : 'Fuera del GAM';
+    const msg = `🛍️ *Pedido — Bags Station CR*\n${'─'.repeat(21)}\n${lines}\n${'─'.repeat(21)}\nSubtotal: ${formatPrice(subtotal)}\nEnvío (${shipLabel}): ${formatPrice(shipping)}\n*Total: ${formatPrice(subtotal + shipping)}*\n\n👤 *Nombre:* ${nombre} ${apell}\n📞 *Contacto:* ${email}\n📍 *Dirección:* ${dir}${apto ? ', ' + apto : ''}\n🗺️ *Provincia:* ${prov}${ciudad ? ' — ' + ciudad : ''}${notas ? '\n📝 *Notas:* ' + notas : ''}`;
+    window.open('https://wa.me/50660844697?text=' + encodeURIComponent(msg), '_blank');
+    cart = []; saveCart(); updateCartCount();
+    btn.disabled = false;
+    closeCheckout();
+    showToast('¡Pedido enviado! Revisá WhatsApp 🎉', 'success');
+  });
+
+  /* ===== TOAST ===== */
+  function showToast(msg, type) {
+    const el = document.createElement('div');
+    el.className = 'toast' + (type ? ' ' + type : '');
+    el.textContent = msg;
+    document.getElementById('toastContainer').appendChild(el);
+    requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('show')));
+    setTimeout(() => { el.classList.remove('show'); setTimeout(() => el.remove(), 380); }, 2800);
+  }
+
+  /* ===== PRODUCT PAGE ===== */
+  let ppQty = 1;
+  let ppActiveIdx = 0;
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function openProductPage(card) {
+    ppQty = 1; ppActiveIdx = 0;
+    const productId = card.dataset.product;
+    const data = GALLERY[productId];
+    if (!data) return;
+    const brand     = (card.querySelector('.prod-brand') || {textContent:''}).textContent;
+    const brandAttr = card.dataset.brand || '';
+    const name      = (card.querySelector('.prod-name')  || {textContent:''}).textContent;
+    const desc      = (card.querySelector('.prod-desc')  || {textContent:''}).textContent;
+    const priceEl   = card.querySelector('.prod-price');
+    const priceText = priceEl ? priceEl.childNodes[0].textContent.trim() : '₡0';
+    const page      = document.getElementById('prodPage');
+
+    const swatchesHtml = data.colors.map((col, i) =>
+      `<button class="pp-swatch${i===0?' active':''}" style="background:${col.c}" title="${esc(col.n)}" aria-label="${esc(col.n)}" data-idx="${i}"></button>`
+    ).join('');
+
+    page.innerHTML = `
+      <div class="pp-topbar">
+        <div class="container">
+          <div class="pp-topbar-inner">
+            <button class="pp-back" id="ppBack">
+              <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+              Volver
+            </button>
+            <span style="font-size:.75rem;color:var(--text-3);font-weight:500;">${esc(brand)}</span>
+            <button class="cart-btn" id="ppCartBtn" aria-label="Carrito">
+              <svg width="19" height="19" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              <span class="cart-count" id="ppCartCount">0</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="pp-grid">
+          <div class="pp-gallery">
+            <div class="pp-main-wrap"><img class="pp-main-img" id="ppMainImg" src="" alt="${esc(name)}" loading="eager"></div>
+            <div class="pp-thumbs" id="ppThumbs"></div>
+          </div>
+          <div class="pp-info">
+            <div class="pp-brand-tag">${esc(brand)}</div>
+            <h1 class="pp-name">${esc(name)}</h1>
+            <div class="pp-price-row">
+              <span class="pp-price">${esc(priceText)}</span>
+              <span class="pp-price-sub">Envío a todo CR</span>
+            </div>
+            <div class="pp-sep"></div>
+            <div class="pp-color-section">
+              <div class="pp-color-heading">Color: <span class="pp-color-name" id="ppColorName">${esc(data.colors[0].n)}</span></div>
+              <div class="pp-swatches">${swatchesHtml}</div>
+            </div>
+            <p class="pp-desc">${esc(desc)}</p>
+            <div class="pp-sep"></div>
+            <div>
+              <div class="pp-qty-label">Cantidad</div>
+              <div class="pp-qty-ctrl">
+                <button class="pp-qty-btn" id="ppQtyMinus">−</button>
+                <span class="pp-qty-num" id="ppQtyNum">1</span>
+                <button class="pp-qty-btn" id="ppQtyPlus">+</button>
+              </div>
+            </div>
+            <div class="pp-actions">
+              <button class="pp-btn-buy-now" id="ppBuyNow">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Comprar ahora
+              </button>
+              <button class="pp-btn-cart" id="ppAddCart">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                Agregar al carrito
+              </button>
+              <button class="pp-btn-wa" id="ppBuyWa">
+                <svg width="16" height="16" fill="currentColor" aria-hidden="true"><use href="#ico-wa"/></svg>
+                Comprar por WhatsApp
+              </button>
+            </div>
+            <div class="pp-sinpe">
+              💳 <strong>SINPE Móvil</strong> — Valeria Ocampos Martínez · <strong>6105-6729</strong><br>
+              Envía el comprobante al <a href="https://instagram.com/bagstationcr" target="_blank" rel="noopener">@bagstationcr</a> o al <a href="https://wa.me/50660844697" target="_blank" rel="noopener">WhatsApp 6084-4697</a>
+            </div>
+          </div>
+        </div>
+        <div class="pp-related" id="ppRelated"></div>
+      </div>`;
+
+    function ppSetColor(idx) {
+      ppActiveIdx = idx;
+      const col  = data.colors[idx];
+      const imgs = col.i.slice(0, 6);
+      page.querySelectorAll('.pp-swatch').forEach((s, i) => s.classList.toggle('active', i === idx));
+      const cnEl = page.querySelector('#ppColorName');
+      if (cnEl) cnEl.textContent = col.n;
+      const mainImg = page.querySelector('#ppMainImg');
+      if (mainImg) {
+        mainImg.style.opacity = '0';
+        setTimeout(() => { mainImg.src = encodeURI(imgs[0]); mainImg.style.opacity = ''; }, 150);
+      }
+      const thumbsEl = page.querySelector('#ppThumbs');
+      if (thumbsEl) {
+        thumbsEl.innerHTML = '';
+        imgs.forEach((src, i) => {
+          const btn = document.createElement('button');
+          btn.className = 'pp-thumb' + (i === 0 ? ' active' : '');
+          const tImg = document.createElement('img');
+          tImg.src = encodeURI(src); tImg.loading = 'lazy'; tImg.alt = '';
+          btn.appendChild(tImg);
+          btn.addEventListener('click', () => {
+            thumbsEl.querySelectorAll('.pp-thumb').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            if (mainImg) { mainImg.style.opacity = '0'; setTimeout(() => { mainImg.src = encodeURI(src); mainImg.style.opacity = ''; }, 120); }
+          });
+          thumbsEl.appendChild(btn);
+        });
+      }
+    }
+
+    page.querySelectorAll('.pp-swatch').forEach(btn => {
+      btn.addEventListener('click', () => ppSetColor(+btn.dataset.idx));
+    });
+    page.querySelector('#ppQtyMinus').addEventListener('click', () => {
+      ppQty = Math.max(1, ppQty - 1);
+      page.querySelector('#ppQtyNum').textContent = ppQty;
+    });
+    page.querySelector('#ppQtyPlus').addEventListener('click', () => {
+      ppQty++;
+      page.querySelector('#ppQtyNum').textContent = ppQty;
+    });
+    page.querySelector('#ppCartBtn').addEventListener('click', openCart);
+    page.querySelector('#ppAddCart').addEventListener('click', () => {
+      const col      = data.colors[ppActiveIdx];
+      const priceNum = parsePrice(priceText);
+      const found    = cart.find(x => x.id === productId && x.color === col.n);
+      if (found) { found.qty += ppQty; } else { cart.push({ id: productId, name, color: col.n, priceNum, img: col.i[0], qty: ppQty }); }
+      saveCart(); updateCartCount();
+      showToast('✓ ' + name + (ppQty > 1 ? ' (×' + ppQty + ')' : '') + ' agregado', 'success');
+    });
+    page.querySelector('#ppBuyNow').addEventListener('click', () => {
+      const col = data.colors[ppActiveIdx];
+      buyNow(productId, name, col.n, priceText, col.i[0], ppQty);
+    });
+    page.querySelector('#ppBuyWa').addEventListener('click', () => {
+      const col   = data.colors[ppActiveIdx];
+      const total = parsePrice(priceText) * ppQty;
+      const msg   = '🛍️ *Pedido — Bags Station CR*\n' + '─'.repeat(21) + '\n• ' + name + ' (' + col.n + ') x' + ppQty + ' — ' + formatPrice(total) + '\n' + '─'.repeat(21) + '\n*Total: ' + formatPrice(total) + '*';
+      window.open('https://wa.me/50660844697?text=' + encodeURIComponent(msg), '_blank');
+    });
+    page.querySelector('#ppBack').addEventListener('click', closeProdPage);
+
+    // Related products (same brand, up to 4)
+    const relEl    = page.querySelector('#ppRelated');
+    const relCards = Array.from(document.querySelectorAll('.prod-card[data-brand="' + brandAttr + '"]'))
+      .filter(c => c.dataset.product !== productId).slice(0, 4);
+    if (relCards.length) {
+      const title = document.createElement('h2');
+      title.className = 'pp-related-title'; title.textContent = 'También te puede gustar';
+      const grid = document.createElement('div'); grid.className = 'pp-related-grid';
+      relCards.forEach(c => {
+        const cData = GALLERY[c.dataset.product];
+        if (!cData) return;
+        const cName  = (c.querySelector('.prod-name') || {textContent:''}).textContent;
+        const relDiv = document.createElement('div'); relDiv.className = 'pp-rel-card';
+        const imgDiv = document.createElement('div'); imgDiv.className = 'pp-rel-img';
+        const img    = document.createElement('img');
+        img.src = encodeURI(cData.colors[0].i[0]); img.alt = cName; img.loading = 'lazy';
+        imgDiv.appendChild(img);
+        const nameDiv = document.createElement('div'); nameDiv.className = 'pp-rel-name';
+        nameDiv.textContent = cName;
+        relDiv.append(imgDiv, nameDiv);
+        relDiv.addEventListener('click', () => openProductPage(c));
+        grid.appendChild(relDiv);
+      });
+      relEl.append(title, grid);
+    }
+
+    ppSetColor(0);
+    updateCartCount();
+    page.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    page.scrollTop = 0;
+    history.pushState({ pp: productId }, '', '#p/' + productId);
+  }
+
+  function closeProdPage() {
+    const page = document.getElementById('prodPage');
+    page.classList.remove('open');
+    document.body.style.overflow = '';
+    if (history.state && history.state.pp) history.back();
+  }
+
+  window.addEventListener('popstate', () => {
+    const page = document.getElementById('prodPage');
+    if (!location.hash.startsWith('#p/') && page.classList.contains('open')) {
+      page.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+
+  document.querySelectorAll('.prod-card[data-product]').forEach(card => {
+    card.addEventListener('click', e => {
+      if (e.target.closest('.btn-wa, .btn-add-cart, .btn-buy-now-foot, .color-swatch, .gallery-thumb, .prod-hover-btn')) return;
+      openProductPage(card);
+    });
+  });
+
+  updateCartCount();
+</script>
+</body>
+</html>
